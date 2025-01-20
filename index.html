@@ -41,7 +41,7 @@
         <abbr title="Hyper Text Markup Language">HTML</abbr> Form 컨트롤
       </h2>
       <form
-        action=""
+        action="http://localhost:4000/api/hello"
         method="GET"
       >
         <div style="margin-block-end: 8px">
@@ -58,6 +58,14 @@
             type="email"
             name="useremail"
             id="userEmailInput"
+          />
+        </div>
+        <div style="margin-block-end: 8px">
+          <label for="userPasswordInput">패스워드</label>
+          <input
+            type="password"
+            name="userpassword"
+            id="userPasswordInput"
           />
         </div>
         <button type="submit">제출</button>
