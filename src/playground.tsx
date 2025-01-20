@@ -28,10 +28,6 @@ function Playground() {
       id: 6,
       label: '원피스',
     },
-    {
-      id: 7,
-      label: '수영복',
-    },
   ]);
 
   return (
