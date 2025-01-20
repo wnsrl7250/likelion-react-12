@@ -1,34 +1,10 @@
 import { useState } from 'react';
 import type { ChipListType } from '@/types/chip';
 import ChipList from '@/components/chip-list';
+import { chips } from '@/datas/chips';
 
 function Playground() {
-  const [chipData] = useState<ChipListType>([
-    {
-      id: 1,
-      label: '전체',
-    },
-    {
-      id: 2,
-      label: '아우터',
-    },
-    {
-      id: 3,
-      label: '바지',
-    },
-    {
-      id: 4,
-      label: '티셔츠',
-    },
-    {
-      id: 5,
-      label: '점퍼',
-    },
-    {
-      id: 6,
-      label: '원피스',
-    },
-  ]);
+  const [chipData] = useState<ChipListType>(chips);
 
   return (
     <div className="Playground" style={{ marginInline: 40 }}>
