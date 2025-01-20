@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ChipList as ChipListType } from '@/types/chip';
+import type { ChipListType } from '@/types/chip';
 import ChipList from '@/components/chip-list';
 
 function Playground() {
@@ -31,9 +31,19 @@ function Playground() {
   ]);
 
   return (
-    <div className="Playground">
+    <div className="Playground" style={{ marginInline: 40 }}>
       <h1>Playground</h1>
-      <ChipList items={chipData} />
+      <div
+        style={{
+          inlineSize: 320,
+          blockSize: 640,
+          border: '4px solid rgba(0 0 0 / 10%)',
+          borderRadius: 12,
+          padding: 8,
+        }}
+      >
+        <ChipList items={chipData} />
+      </div>
     </div>
   );
 }
