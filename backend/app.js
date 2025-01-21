@@ -1,8 +1,5 @@
-import bcrypt from 'bcrypt';
 import express from 'express';
 import { createUser } from './lib/user.js';
-
-console.log(bcrypt);
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));

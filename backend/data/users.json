@@ -10,5 +10,17 @@
     "email": "yamoo9@naver.com",
     "password": "$2b$10$6dHtQ34rZC5yWbm9YQOiU.hI9Ek0MrUzlrt0cD9XlSVVHHvUvQbLi",
     "id": "17c7075e-0cb6-42e8-9d02-156aab3a4935"
+  },
+  {
+    "id": "cc3d6c07-091c-41dd-9fab-7d4ba166711b",
+    "name": "박현주",
+    "email": "park@naver.com",
+    "password": "$2b$09$j07cC8hGZ9APBPCVLdNKr.L6bs2JIBdhEa2D6wNjigw8i9eMudllG"
+  },
+  {
+    "id": "c8b86b0c-4b70-451f-bc23-f613231e929e",
+    "name": "민준기",
+    "email": "wnsrl7250@naver.com",
+    "password": "$2b$09$2sW9qC.yoD9X0V07w7HCBugjCR7o89wqauMz6xcGGMCf5Hp83/Or6"
   }
 ]
