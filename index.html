@@ -36,7 +36,36 @@
     <div id="root"></div>
 
     <section style="margin-inline: 48px">
-      <h2>회원가입 폼</h2>
+      <h2>로그인 폼 (POST 메서드)</h2>
+      <form
+        action="http://localhost:4000/api/signin"
+        method="POST"
+      >
+        <div style="margin-block-end: 8px">
+          <label for="userEmailSignIn">이메일</label>
+          <input
+            type="email"
+            name="useremail"
+            id="userEmailSignIn"
+          />
+        </div>
+        <div style="margin-block-end: 8px">
+          <label for="userPasswordSignIn">패스워드</label>
+          <input
+            type="password"
+            name="userpassword"
+            id="userPasswordSignIn"
+          />
+        </div>
+        <button type="submit">로그인</button>
+        <button type="reset">초기화</button>
+      </form>
+    </section>
+
+    <hr style="margin-block-start: 32px;" />
+
+    <section style="margin-inline: 48px">
+      <h2>회원가입 폼 (POST 메서드)</h2>
       <form
         action="http://localhost:4000/api/signup"
         method="POST"

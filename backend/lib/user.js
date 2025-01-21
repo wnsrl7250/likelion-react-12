@@ -43,10 +43,8 @@ export async function createUser(newUser) {
   return createdUser;
 }
 
-createUser({
-  name: '박현주',
-  email: 'park@naver.com',
-  password: 'qwerty!@',
-});
-
-export async function isRegisteredUser() {}
+export async function isRegisteredUser(email, password) {
+  const user = await findUserByEmail(email);
+  if (!user) return null;
+  return await bcrypt.compare(password, user.password);
+}
