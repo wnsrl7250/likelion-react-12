@@ -1,9 +1,7 @@
 import express from 'express';
 
-// Express {}
 const app = express();
 
-// 라우팅(Routing)
 app.get('/api/hello', (request, response) => {
   const { username, useremail } = request.query;
   if (username && useremail) {
