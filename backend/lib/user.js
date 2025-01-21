@@ -33,6 +33,7 @@ export async function createUser(newUser) {
     id: crypto.randomUUID(),
     name: newUser.name,
     email: newUser.email,
+    profileImage: newUser.profileImage,
     password: hashedPassword,
   };
 

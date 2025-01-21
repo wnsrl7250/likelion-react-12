@@ -1,8 +1,12 @@
 import express from 'express';
+import { resolve } from 'node:path';
+import fileUpload from 'express-fileupload';
 import { createUser, isRegisteredUser } from './lib/user.js';
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(resolve('./public')));
+app.use(fileUpload());
 
 app.post('/api/signin', async (request, response) => {
   const { useremail, userpassword } = request.body;
@@ -38,13 +42,6 @@ app.post('/api/signin', async (request, response) => {
 });
 
 app.post('/api/signup', async (request, response) => {
-  // 클라이언트 요청 데이터
-  /* request.body = {
-      username: '지훈',
-      useremail: 'yamoo9@naver.com',
-      userpassword: '12345'
-    } */
-
   const { username, useremail, userpassword } = request.body;
 
   if (!username || !useremail || !userpassword) {
@@ -53,18 +50,32 @@ app.post('/api/signup', async (request, response) => {
     `);
   }
 
+  // 파일(files) 정보 접근
+  const profileImage = request.files?.userprofile;
+  let profileImagePath = '';
+
+  if (profileImage) {
+    await profileImage.mv(resolve('public/files', profileImage.name));
+    profileImagePath = `/files/${profileImage.name}`;
+  } else {
+    console.log('이미지 없음');
+  }
+
   try {
     // 새 사용자 생성 (백엔드 스토리지)
     const newUser = await createUser({
       name: username,
       email: useremail,
       password: userpassword,
+      profileImage: profileImagePath,
     });
 
     if (newUser) {
-      response
-        .status(201)
-        .send(`${newUser.name}님! 회원가입에 성공했습니다. 😊`);
+      // response
+      //   .status(201)
+      //   .send(`${newUser.name}님! 회원가입에 성공했습니다. 😊`);
+      const { password, ...user } = newUser;
+      response.status(201).json(user);
     } else {
       response
         .status(400)
