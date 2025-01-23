@@ -1,13 +1,5 @@
 import { useId, type ComponentProps } from 'react';
 
-// interface FormInputProps extends ComponentProps<'input'> {
-//   label: string;
-// }
-
-// type FormInputProps = ComponentProps<'input'> & {
-//   label: string;
-// };
-
 function FormInput({
   label,
   ...restProps
@@ -25,3 +17,5 @@ function FormInput({
 }
 
 export default FormInput;
+
+export type FormInputProps = ComponentProps<typeof FormInput>;
