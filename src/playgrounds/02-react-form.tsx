@@ -18,11 +18,7 @@ function ReactForm() {
       <h2>React 폼(form)</h2>
       <form style={formStyles}>
         {/* type=text */}
-        <FormInput
-          // type="text"
-          label="이름"
-          placeholder="박수무당"
-        />
+        <FormInput label="이름" placeholder="박수무당" />
 
         {/* type=password */}
         <FormInput
@@ -77,7 +73,46 @@ function ReactForm() {
         </div>
 
         {/* type=file */}
-        <FormInput label="프로필" type="file" accept="image/*" multiple />
+        <div style={{ padding: 12, border: '0.5px solid rgba(0 0 0 / 30%)' }}>
+          <FormInput
+            label="프로필"
+            type="file"
+            accept="image/*"
+            // multiple
+            onChange={(e) => {
+              const { target: element } = e;
+              if (element.files && element.files.length > 0) {
+                const [profileImage] = element.files;
+                // console.log(profileImage); // File
+
+                // 명령형 프로그래밍
+                const profileImagePath = URL.createObjectURL(profileImage);
+                const parentElement = element.parentElement!;
+
+                parentElement.querySelector('img')?.remove();
+
+                const imgElement = document.createElement('img');
+
+                imgElement.setAttribute('src', profileImagePath);
+                imgElement.setAttribute('alt', '업로드 할 프로필');
+                imgElement.style.cssText = `
+            width: 100px;
+            height: 100px;
+          `;
+
+                parentElement.append(imgElement);
+              }
+            }}
+          />
+          {/* 업로드 할 이미지 표시 */}
+          {/* <img
+      style={{marginBlockStart: 8}}
+      src="/profiles/proflie-04.jpg"
+      alt="업로드 할 프로필"
+      width={100}
+      height={100}
+    /> */}
+        </div>
 
         {/* type=radio */}
         <fieldset>
