@@ -12,12 +12,44 @@ function ReactForm() {
   const [age, setAge] = useState<number>(22);
   const [color, setColor] = useState<string>('#2483DB');
   const [limitAge, setLimitAge] = useState<number>(40);
+
   const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  const handleUploadProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = e;
+
+    if (target.files && target.files.length > 0) {
+      const file = target.files.item(0);
+      if (file) {
+        setProfileImage(URL.createObjectURL(file));
+      }
+    }
+  };
 
   return (
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
       <form style={formStyles}>
+        {/* type=file */}
+        <div style={{ padding: 12, border: '0.5px solid rgba(0 0 0 / 30%)' }}>
+          <FormInput
+            type="file"
+            label="프로필"
+            accept="image/*"
+            // multiple
+            onChange={handleUploadProfile}
+          />
+          {profileImage && (
+            <img
+              style={{ marginBlockStart: 8 }}
+              src={profileImage}
+              alt="업로드 할 프로필"
+              width={100}
+              height={100}
+            />
+          )}
+        </div>
+
         {/* type=text */}
         <FormInput label="이름" placeholder="박수무당" />
 
@@ -71,34 +103,6 @@ function ReactForm() {
             }}
           />
           <output>{limitAge}</output>
-        </div>
-
-        {/* type=file */}
-        <div style={{ padding: 12, border: '0.5px solid rgba(0 0 0 / 30%)' }}>
-          <FormInput
-            label="프로필"
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const { files } = e.target;
-
-              if (files && files.length > 0) {
-                const [file] = files;
-                const profileImagePath = URL.createObjectURL(file);
-                setProfileImage(profileImagePath);
-              }
-            }}
-          />
-          {/* 업로드 할 이미지 표시 */}
-          {profileImage && (
-            <img
-              style={{ marginBlockStart: 8 }}
-              src={profileImage}
-              alt="업로드 할 프로필"
-              width={100}
-              height={100}
-            />
-          )}
         </div>
 
         {/* type=radio */}
