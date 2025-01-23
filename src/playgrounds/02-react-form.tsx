@@ -12,6 +12,7 @@ function ReactForm() {
   const [age, setAge] = useState<number>(22);
   const [color, setColor] = useState<string>('#2483DB');
   const [limitAge, setLimitAge] = useState<number>(40);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
 
   return (
     <div className="ReactForm">
@@ -78,40 +79,26 @@ function ReactForm() {
             label="프로필"
             type="file"
             accept="image/*"
-            // multiple
             onChange={(e) => {
-              const { target: element } = e;
-              if (element.files && element.files.length > 0) {
-                const [profileImage] = element.files;
-                // console.log(profileImage); // File
+              const { files } = e.target;
 
-                // 명령형 프로그래밍
-                const profileImagePath = URL.createObjectURL(profileImage);
-                const parentElement = element.parentElement!;
-
-                parentElement.querySelector('img')?.remove();
-
-                const imgElement = document.createElement('img');
-
-                imgElement.setAttribute('src', profileImagePath);
-                imgElement.setAttribute('alt', '업로드 할 프로필');
-                imgElement.style.cssText = `
-            width: 100px;
-            height: 100px;
-          `;
-
-                parentElement.append(imgElement);
+              if (files && files.length > 0) {
+                const [file] = files;
+                const profileImagePath = URL.createObjectURL(file);
+                setProfileImage(profileImagePath);
               }
             }}
           />
           {/* 업로드 할 이미지 표시 */}
-          {/* <img
-      style={{marginBlockStart: 8}}
-      src="/profiles/proflie-04.jpg"
-      alt="업로드 할 프로필"
-      width={100}
-      height={100}
-    /> */}
+          {profileImage && (
+            <img
+              style={{ marginBlockStart: 8 }}
+              src={profileImage}
+              alt="업로드 할 프로필"
+              width={100}
+              height={100}
+            />
+          )}
         </div>
 
         {/* type=radio */}
