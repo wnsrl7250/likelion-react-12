@@ -1,11 +1,10 @@
 import { useId, type ComponentProps } from 'react';
 
-function FormInput({
-  label,
-  ...restProps
-}: ComponentProps<'input'> & {
+type FormInputProps = ComponentProps<'input'> & {
   label: string;
-}) {
+};
+
+function FormInput({ label, ...restProps }: FormInputProps) {
   const inputId = useId();
 
   return (
@@ -17,5 +16,3 @@ function FormInput({
 }
 
 export default FormInput;
-
-export type FormInputProps = ComponentProps<typeof FormInput>;
