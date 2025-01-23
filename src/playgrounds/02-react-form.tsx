@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import FormInput from '@/components/form-input';
-import FormRadioOrCheckbox from '@/components/form-radio-or-checkbox';
 
 const formStyles = {
   display: 'flex',
@@ -83,14 +82,14 @@ function ReactForm() {
         {/* type=radio */}
         <fieldset>
           <legend>성별</legend>
-          <FormRadioOrCheckbox
+          <FormInput
             type="radio"
             label="남성"
             name="usergender"
             value="male"
             defaultChecked
           />
-          <FormRadioOrCheckbox
+          <FormInput
             type="radio"
             label="여성"
             name="usergender"
@@ -101,20 +100,20 @@ function ReactForm() {
         {/* type=checkbox */}
         <fieldset>
           <legend>취미</legend>
-          <FormRadioOrCheckbox
+          <FormInput
             type="checkbox"
             label="공부"
             name="userhobby"
             value="study"
             defaultChecked
           />
-          <FormRadioOrCheckbox
+          <FormInput
             type="checkbox"
             label="운동"
             name="userhobby"
             value="helth"
           />
-          <FormRadioOrCheckbox
+          <FormInput
             type="checkbox"
             label="영화 감상"
             name="userhobby"
