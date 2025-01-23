@@ -122,10 +122,14 @@ function ReactForm() {
         </fieldset>
 
         {/* type=date */}
+        <FormInput type="date" label="여행 날짜" />
 
         {/* type=datetime-local */}
+        <FormInput type="datetime-local" label="비행기 출국 시간" />
 
         <button type="submit">제출</button>
+        <button type="reset">초기화</button>
+        {/* <input type="reset" value="초기화" /> */}
       </form>
     </div>
   );

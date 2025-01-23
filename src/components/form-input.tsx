@@ -15,7 +15,7 @@ function FormInput({ label, type, ...restProps }: FormInputProps) {
   return (
     <div className="formControl">
       <label htmlFor={inputId}>{label}</label>
-      <input id={inputId} {...restProps} />
+      <input type={type} id={inputId} {...restProps} />
     </div>
   );
 }
