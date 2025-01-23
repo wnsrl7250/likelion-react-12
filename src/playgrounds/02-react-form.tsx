@@ -26,19 +26,17 @@ function ReactForm() {
     }
   };
 
+  // 컴포넌트 상태 변수 (state variable: 컴포넌트 외부의 상태 관리 시스템 기억)
   const [photos, setPhotos] = useState<File[]>([]);
 
+  // 파생된 상태 변수 (derived state variable)
+  const photoURLs = photos.map((photo) => URL.createObjectURL(photo));
+
+  // 상태 업데이트 핸들러 (이벤트 감지되면 실행)
   const handleUploadPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
-
-    if (fileList && fileList.length > 0) {
-      const fileArray: File[] = [];
-
-      for (let i = 0, l = fileList.length; i < l; ++i) {
-        const file = fileList.item(i);
-        if (file) fileArray.push(file);
-      }
-      setPhotos(fileArray);
+    if (fileList) {
+      setPhotos(Object.values(fileList)); // [File, File, ...]
     }
   };
 
@@ -55,19 +53,16 @@ function ReactForm() {
             onChange={handleUploadPhotos}
           />
           {photos.length > 0
-            ? photos.map((file) => {
-                const { name } = file;
-                return (
-                  <img
-                    key={name}
-                    style={{ marginBlockStart: 8 }}
-                    src={URL.createObjectURL(file)}
-                    alt={name}
-                    width={68}
-                    height={68}
-                  />
-                );
-              })
+            ? photos.map(({ name }, index) => (
+                <img
+                  key={name}
+                  style={{ marginBlockStart: 8 }}
+                  src={photoURLs.at(index)}
+                  alt={name}
+                  width={68}
+                  height={68}
+                />
+              ))
             : null}
         </div>
 
