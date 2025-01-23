@@ -26,17 +26,57 @@ function ReactForm() {
     }
   };
 
+  const [photos, setPhotos] = useState<File[]>([]);
+
+  const handleUploadPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+
+    if (fileList && fileList.length > 0) {
+      const fileArray: File[] = [];
+
+      for (let i = 0, l = fileList.length; i < l; ++i) {
+        const file = fileList.item(i);
+        if (file) fileArray.push(file);
+      }
+      setPhotos(fileArray);
+    }
+  };
+
   return (
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
       <form style={formStyles}>
-        {/* type=file */}
+        <div style={{ padding: 12, border: '0.5px solid rgba(0 0 0 / 30%)' }}>
+          <FormInput
+            type="file"
+            label="포토"
+            accept=".jpg, .jpeg, .png"
+            multiple
+            onChange={handleUploadPhotos}
+          />
+          {photos.length > 0
+            ? photos.map((file) => {
+                const { name } = file;
+                return (
+                  <img
+                    key={name}
+                    style={{ marginBlockStart: 8 }}
+                    src={URL.createObjectURL(file)}
+                    alt={name}
+                    width={68}
+                    height={68}
+                  />
+                );
+              })
+            : null}
+        </div>
+
+        {/* type=file (1) */}
         <div style={{ padding: 12, border: '0.5px solid rgba(0 0 0 / 30%)' }}>
           <FormInput
             type="file"
             label="프로필"
             accept="image/*"
-            // multiple
             onChange={handleUploadProfile}
           />
           {profileImage && (
