@@ -1,3 +1,4 @@
+import './form-input.css';
 import { useId, type ComponentProps } from 'react';
 import FormRadioOrCheckbox from './form-radio-or-checkbox';
 
@@ -13,7 +14,7 @@ function FormInput({ label, type, ...restProps }: FormInputProps) {
   }
 
   return (
-    <div className="formControl">
+    <div className="FormInput">
       <label htmlFor={inputId}>{label}</label>
       <input type={type} id={inputId} {...restProps} />
     </div>
