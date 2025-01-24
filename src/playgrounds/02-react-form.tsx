@@ -2,9 +2,11 @@ import { useState } from 'react';
 import FormInput from '@/components/form-input';
 import FormTextArea from '@/components/form-textarea';
 
+// React에 의해 제어되는 폼 입력 초깃값
 const initialFormData = {
   limitAge: 40,
   profileImage: null,
+  color: '#ffffff',
   photos: [],
   hobbies: [
     {
@@ -35,13 +37,18 @@ const initialFormData = {
 };
 
 function ReactForm() {
-  // 현재 관리되는 폼 데이터 상태: limitAge, profileImage, photos, hobbyList
-
+  // React에 의해 제어되는 입력 값 초기화 함수
   const handleResetForm = () => {
     setLimitAge(initialFormData.limitAge);
     setProfileImage(initialFormData.profileImage);
     setPhotos(initialFormData.photos);
     setHobbyList(initialFormData.hobbies);
+  };
+
+  const [color, setColor] = useState<string>(initialFormData.color);
+  const handleChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nextColorValue = e.currentTarget.value;
+    setColor(nextColorValue);
   };
 
   const [limitAge, setLimitAge] = useState<number>(initialFormData.limitAge);
@@ -170,7 +177,17 @@ function ReactForm() {
         <FormInput type="number" label="나이" defaultValue={24} />
 
         {/* type=color */}
-        <FormInput type="color" label="색상" defaultValue="#ffffff" />
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <FormInput
+            type="color"
+            label="색상"
+            value={color}
+            onChange={handleChangeColor}
+          />
+          <output style={{ translate: '0 12px', color, fontWeight: 700 }}>
+            {color}
+          </output>
+        </div>
 
         {/* type=range */}
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
