@@ -1,51 +1,53 @@
-const ENDPOINT = 'http://localhost:4000/api/signup';
+import { useState } from 'react';
 
-const createRequestOption = (formData: FormData) => ({
-  method: 'POST',
-  body: formData,
-});
+interface ResponseDataType {
+  id: string;
+  name: string;
+  email: string;
+  profileImage: string;
+}
 
 function SignUpForm() {
-  const handleSubmitAsync = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    try {
-      const response = await fetch(ENDPOINT, createRequestOption(formData));
-
-      const data = await response.json();
-
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [responseData, setResponseData] = useState<null | ResponseDataType>(
+    null
+  );
 
   const handleSubmitPromise = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    console.log(formData); // FormData
-    console.log(formData instanceof FormData); // true
 
-    // POST ENDPOINT Request.body (FormData)
-    // fetch() 전역 함수 활용
-    fetch(ENDPOINT, createRequestOption(formData))
+    fetch('http://localhost:4000/api/signup', {
+      method: 'POST',
+      body: formData,
+    })
       .then((response) => response.json())
-      .then((responseData) => console.log(responseData))
+      .then((responseData) => setResponseData(responseData as ResponseDataType))
       .catch((error) => console.error(error));
   };
 
+  // 조건부 렌더링
+  // 회원가입 이후 가입 사용자 정보 (UI 화면)
+  if (responseData) {
+    return (
+      <article className="UserProfile" id={responseData.id}>
+        <h2 className="UserProfile--name">{responseData.name}</h2>
+        <img
+          src={`http://localhost:4000${responseData.profileImage}`}
+          alt=""
+          width={64}
+          height={64}
+        />
+        <p>{responseData.email}</p>
+      </article>
+    );
+  }
+
+  // 회원가입 폼 (UI 화면)
   return (
     <section style={{ marginInline: 48 }}>
       <h2>회원가입 폼 (POST 메서드)</h2>
-      <form
-        // onSubmit={handleSubmitAsync}
-        onSubmit={handleSubmitPromise}
-        // action="http://localhost:4000/api/signup"
-        // encType="multipart/form-data"
-        // method="POST"
-      >
+      <form onSubmit={handleSubmitPromise}>
         <div style={{ marginBlockEnd: 8 }}>
           <label htmlFor="usernameSignUp">이름</label>
           <input type="text" name="username" id="usernameSignUp" />
