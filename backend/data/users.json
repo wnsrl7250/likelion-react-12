@@ -26,5 +26,12 @@
     "email": "lim@naver.com",
     "profileImage": "/files/proflie-01.jpg",
     "password": "$2b$09$U.HWZzNE.YdZh/ApE7YKHuy9h34Ni32q15WRwhQnOyXCiKxUWoboK"
+  },
+  {
+    "id": "7760fb04-1f27-4839-b9fb-17413b0b7fd9",
+    "name": "최강인",
+    "email": "choi@naver.com",
+    "profileImage": "/files/proflie-02.jpg",
+    "password": "$2b$09$dZWf9Zy446EElAV72kn3Iutq4aQqKs907UNJ0/VhP6LziG/N.6oCe"
   }
 ]
