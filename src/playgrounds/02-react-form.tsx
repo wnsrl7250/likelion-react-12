@@ -156,7 +156,12 @@ function ReactForm() {
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
 
-      <form id="ReactForm" style={formStyles}>
+      <form
+        method="POST"
+        action="http://localhost:4000/api/hello"
+        id="ReactForm"
+        style={formStyles}
+      >
         <div
           style={{
             display: 'flex',
