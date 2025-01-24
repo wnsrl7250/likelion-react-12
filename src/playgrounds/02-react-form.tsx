@@ -134,44 +134,120 @@ function ReactForm() {
     setPickSpiceMultiple(selectedOptionValues);
   };
 
+  // [진행률 데모]
+  // 진행률 상태 정의
+  // [상태]
+  const [progressValue, setProgressValue] = useState<number>(15);
+
+  // [파생된 상태]
+  const progressPercent = `${progressValue}%`;
+
+  // 진행률 상태 업데이트 로직 핸들러 함수 정의 (화면 업데이트)
+  // - 상태 값 변경 시, 진행률이 변경
+  // [이벤트 핸들러]
+  const handleChangeProgressValue = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const nextProgressValue = Number(e.currentTarget.value);
+    setProgressValue(nextProgressValue);
+  };
+
   return (
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
 
-      <div className="ComboBox" style={{ marginBlockEnd: 12 }}>
-        <label htmlFor="spice-pick-1">향신료 1개 선택</label>
-        <select
-          value={pickSpiceOne}
-          onChange={handlePickSpiceOne}
-          form="ReactForm"
-          id="spice-pick-1"
-          name="spice-pick-1"
-        >
-          <option value="">맘에 드는 향신료 1개 선택</option>
-          <option value="lemongrass">레몬그라스</option>
-          <option value="rosmari">로즈마리</option>
-          <option value="lavender">라벤더</option>
-        </select>
-      </div>
-
-      <div className="ComboBox">
-        <label htmlFor="spice-pick-n">향신료 여러개 선택</label>
-        <select
-          multiple
-          value={pickSpiceMultiple}
-          onChange={handlePickSpiceMultiple}
-          form="ReactForm"
-          id="spice-pick-n"
-          name="spice-pick-n"
-        >
-          <option value="">맘에 드는 향신료 N개 선택</option>
-          <option value="lemongrass">레몬그라스</option>
-          <option value="rosmari">로즈마리</option>
-          <option value="lavender">라벤더</option>
-        </select>
-      </div>
-
       <form id="ReactForm" style={formStyles}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 8,
+            alignItems: 'center',
+            marginBlockStart: 20,
+          }}
+        >
+          <FormInput
+            type="range"
+            label="진행률 업데이트"
+            min={0}
+            max={100}
+            step={10}
+            value={progressValue}
+            onChange={handleChangeProgressValue}
+            style={{
+              accentColor: '#171c28',
+            }}
+          />
+          <output style={{ translate: '0 12px' }}>{progressPercent}</output>
+        </div>
+
+        {/* progress */}
+        <div
+          style={{
+            display: 'flex',
+            flexFlow: 'column',
+            gap: 8,
+            marginBlockEnd: 20,
+          }}
+        >
+          <label htmlFor="progress-bar">진행률</label>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            <progress
+              id="progress-bar"
+              value={progressValue}
+              max="100"
+              style={{
+                accentColor: '#171c28',
+              }}
+            >
+              {progressPercent}
+            </progress>
+            <output>{progressPercent}</output>
+          </div>
+        </div>
+
+        {/* select / options */}
+        <div
+          className="ComboBox"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <label htmlFor="spice-pick-1">향신료 1개 선택</label>
+          <select
+            value={pickSpiceOne}
+            onChange={handlePickSpiceOne}
+            form="ReactForm"
+            id="spice-pick-1"
+            name="spice-pick-1"
+          >
+            <option value="">맘에 드는 향신료 1개 선택</option>
+            <option value="lemongrass">레몬그라스</option>
+            <option value="rosmari">로즈마리</option>
+            <option value="lavender">라벤더</option>
+          </select>
+        </div>
+
+        <div
+          className="ComboBox"
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <label htmlFor="spice-pick-n">향신료 여러개 선택</label>
+          <select
+            multiple
+            value={pickSpiceMultiple}
+            onChange={handlePickSpiceMultiple}
+            form="ReactForm"
+            id="spice-pick-n"
+            name="spice-pick-n"
+          >
+            <option value="">맘에 드는 향신료 N개 선택</option>
+            <option value="lemongrass">레몬그라스</option>
+            <option value="rosmari">로즈마리</option>
+            <option value="lavender">라벤더</option>
+          </select>
+        </div>
+
         {/* type=radio */}
         <fieldset>
           <legend>성별</legend>
