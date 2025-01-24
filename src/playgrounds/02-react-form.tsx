@@ -117,7 +117,16 @@ function ReactForm() {
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
 
-      <form style={formStyles}>
+      <div className="ComboBox">
+        <label htmlFor="spice-pick">향신료 선택</label>
+        <select form="ReactForm" id="spice-pick" name="spice-pick">
+          <option value="lemongrass">레몬그라스</option>
+          <option value="rosmari">로즈마리</option>
+          <option value="lavender">라벤더</option>
+        </select>
+      </div>
+
+      <form id="ReactForm" style={formStyles}>
         {/* type=radio */}
         <fieldset>
           <legend>성별</legend>
