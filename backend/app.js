@@ -79,9 +79,10 @@ app.post('/api/signup', async (request, response) => {
       const { password, ...user } = newUser;
       response.status(201).json(user);
     } else {
-      response
-        .status(400)
-        .send(`${username}님은 회원 가입을 이미 하셨습니다. 😥`);
+      response.status(400).json({
+        name: '등록된 사용자 확인',
+        message: `${username}님은 ${useremail} 이메일 주소로 회원 가입을 이미 하셨습니다. 😥`,
+      });
     }
   } catch (error) {
     response.status(500).send('회원가입에 문제가 발생했습니다.');
