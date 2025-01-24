@@ -90,11 +90,11 @@ function ReactForm() {
 
   // derived state
   // - 모두 체크 되었나?
-  const isAllCheckedHobbyList = hobbyList.every((hobby) => hobby.checked);
-  console.log({ isAllCheckedHobbyList });
+  // const isAllCheckedHobbyList = hobbyList.every((hobby) => hobby.checked);
+  // console.log({ isAllCheckedHobbyList });
   // - 모두 체크 안되었나?
-  const isNotAllCheckedHobbyList = hobbyList.every((hobby) => !hobby.checked);
-  console.log({ isNotAllCheckedHobbyList });
+  // const isNotAllCheckedHobbyList = hobbyList.every((hobby) => !hobby.checked);
+  // console.log({ isNotAllCheckedHobbyList });
 
   const handleCheckedHobbies = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked: nextCheckedValue } = e.target;
@@ -113,13 +113,58 @@ function ReactForm() {
     setHobbyList(nextHobbyList);
   };
 
+  // 1. 아이템 1개 선택할 때 제어
+  const [pickSpiceOne, setPickSpiceOne] = useState<string>('rosmari');
+  const handlePickSpiceOne = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptionValue = e.currentTarget.value;
+    setPickSpiceOne(selectedOptionValue);
+  };
+
+  // 2. 여러 아이템 선택할 때 제어
+  const [pickSpiceMultiple, setPickSpiceMultiple] = useState<string[]>([
+    'lemongrass',
+  ]);
+  const handlePickSpiceMultiple = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { selectedOptions } = e.currentTarget; // HTMLCollection 유사 배열 (배열 아님)
+    const selectedOptionList = Array.from(selectedOptions); // 유사 배열 -> 배열 변경 (배열 능력 사용 목적)
+    const selectedOptionValues = selectedOptionList.map(
+      (option) => option.value
+    ); // 배열의 map 메서드를 사용해 각 항목을 순환한 후 처리된 새로운 배열 반환
+
+    setPickSpiceMultiple(selectedOptionValues);
+  };
+
   return (
     <div className="ReactForm">
       <h2>React 폼(form)</h2>
 
+      <div className="ComboBox" style={{ marginBlockEnd: 12 }}>
+        <label htmlFor="spice-pick-1">향신료 1개 선택</label>
+        <select
+          value={pickSpiceOne}
+          onChange={handlePickSpiceOne}
+          form="ReactForm"
+          id="spice-pick-1"
+          name="spice-pick-1"
+        >
+          <option value="">맘에 드는 향신료 1개 선택</option>
+          <option value="lemongrass">레몬그라스</option>
+          <option value="rosmari">로즈마리</option>
+          <option value="lavender">라벤더</option>
+        </select>
+      </div>
+
       <div className="ComboBox">
-        <label htmlFor="spice-pick">향신료 선택</label>
-        <select form="ReactForm" id="spice-pick" name="spice-pick">
+        <label htmlFor="spice-pick-n">향신료 여러개 선택</label>
+        <select
+          multiple
+          value={pickSpiceMultiple}
+          onChange={handlePickSpiceMultiple}
+          form="ReactForm"
+          id="spice-pick-n"
+          name="spice-pick-n"
+        >
+          <option value="">맘에 드는 향신료 N개 선택</option>
           <option value="lemongrass">레몬그라스</option>
           <option value="rosmari">로즈마리</option>
           <option value="lavender">라벤더</option>
