@@ -19,5 +19,12 @@
     "email": "ji@naver.com",
     "profileImage": "/files/proflie-03.jpg",
     "password": "$2b$09$IdxBaUtROV6H7TMgNL1ln.q4LHRCPpjjQmtMPiGMMfUNGSw4H4RA."
+  },
+  {
+    "id": "79f8fd60-9bb9-4811-9e41-0e9e86a5de19",
+    "name": "박준",
+    "email": "parkjun@naver.com",
+    "profileImage": "/files/proflie-04.jpg",
+    "password": "$2b$09$d1uaRzMUDkQBflhVRX5Qnezgz1KgS/c5DOK1/Kjl/yuOhSE8txDrO"
   }
 ]

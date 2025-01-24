@@ -12,18 +12,19 @@ function SignUpForm() {
     null
   );
 
-  const handleSubmitPromise = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmitAction = async (formData: FormData) => {
+    try {
+      const response = await fetch('http://localhost:4000/api/signup', {
+        method: 'POST',
+        body: formData,
+      });
 
-    const formData = new FormData(e.currentTarget);
+      const jsonData = await response.json();
 
-    fetch('http://localhost:4000/api/signup', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((responseData) => setResponseData(responseData as ResponseDataType))
-      .catch((error) => console.error(error));
+      setResponseData(jsonData as ResponseDataType);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // 조건부 렌더링
@@ -46,8 +47,11 @@ function SignUpForm() {
   // 회원가입 폼 (UI 화면)
   return (
     <section style={{ marginInline: 48 }}>
-      <h2>회원가입 폼 (POST 메서드)</h2>
-      <form onSubmit={handleSubmitPromise}>
+      <h2>회원가입 폼</h2>
+      <form
+        // onSubmit={handleSubmitPromise}
+        action={handleSubmitAction}
+      >
         <div style={{ marginBlockEnd: 8 }}>
           <label htmlFor="usernameSignUp">이름</label>
           <input type="text" name="username" id="usernameSignUp" />
