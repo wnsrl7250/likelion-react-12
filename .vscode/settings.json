@@ -152,10 +152,13 @@
   ],
   // 참고: https://github.com/paolotiu/tailwind-intellisense-regex-list?tab=readme-ov-file#readme
   "tailwindCSS.experimental.classRegex": [
+    ":\\s*?[\"'`]([^\"'`]*).*?,",
     ["Styles\\s*(?::\\s*[^=]+)?\\s*=\\s*([^;]*);", "['\"`]([^'\"`]*)['\"`]"],
-    ["classes\\s*(?::\\s*[^=]+)?\\s*=\\s*([^;]*);", "['\"`]([^'\"`]*)['\"`]"],
     ["clsx\\(.*?\\)(?!\\])", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"],
-    ["classnames\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
+    ["classnames\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"],
+    [
+      "(?:\\b(?:const|let|var)\\s+)?[\\w$_]*(?:[Ss]tyles|[Cc]lasses|[Cc]lassnames)[\\w\\d]*\\s*(?:=|\\+=)\\s*['\"]([^'\"]*)['\"]"
+    ]
   ],
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.includeLanguages": {

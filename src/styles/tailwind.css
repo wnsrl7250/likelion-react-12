@@ -8,4 +8,9 @@
 
 @theme {
   /* 디자인 토큰 구성 */
+  --color-euid-gray-200: #d7dadf;
+}
+
+@utility wrapper {
+  @apply min-w-80 max-w-180 mx-auto;
 }

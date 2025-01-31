@@ -3,7 +3,6 @@ import Nav from './homework/components/nav';
 import HomeworkSignIn from './homework/pages/sign-in';
 import HomeworkSignUpForm from './homework/pages/sign-up';
 
-// 리액트 외부 시스템 (부수적인 것: Side effects)
 const getUIView = () => {
   const searchParams = new URLSearchParams(location.search);
   const uiView = searchParams.get('view') ?? 'signin';
@@ -17,10 +16,7 @@ function Playground() {
   const isSignInView = uiView.includes('signin');
 
   return (
-    <div
-      className="Playground bg-stone-300/80"
-      // style={{ background: '#d7dadf' }}
-    >
+    <div className="Playground bg-euid-gray-200 wrapper">
       <h1>플레이그라운드</h1>
       <Nav />
       {isSignInView ? <HomeworkSignIn /> : <HomeworkSignUpForm />}

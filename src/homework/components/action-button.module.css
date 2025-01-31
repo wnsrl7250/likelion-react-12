@@ -12,7 +12,7 @@
   border-radius: 100px;
   background: #004FFF;
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 600;
 
   &:hover:not(:disabled, &[aria-disabled="true"]) {
