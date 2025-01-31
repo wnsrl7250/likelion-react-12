@@ -1,5 +1,5 @@
 import FormInput from '../components/form-input';
-import CommonFormInput from '@/components/form-input';
+// import CommonFormInput from '@/components/form-input';
 
 function HomeworkSignUpForm() {
   return (
