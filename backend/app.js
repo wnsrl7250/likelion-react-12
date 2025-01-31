@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import { resolve } from 'node:path';
 import fileUpload from 'express-fileupload';
-import { createUser, isRegisteredUser } from './lib/user.js';
+import { createUser, isRegisteredUser, findUserByEmail } from './lib/user.js';
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -21,8 +21,6 @@ app.post('/api/signin', async (request, response) => {
 
   const result = await isRegisteredUser(useremail, userpassword); // null or true or false
 
-  console.log({ result });
-
   // null인 경우, 가입한 적이 없는 사용자 실패!
   if (result === null) {
     return response.status(400).send(`
@@ -32,9 +30,12 @@ app.post('/api/signin', async (request, response) => {
 
   if (result) {
     // true인 경우, 패스워드가 유효한 사용자 (인증) 성공!
-    return response.status(200).send(`
-      <p>${useremail} 계정으로 로그인 되었습니다.</p>
-    `);
+    // return response.status(200).send(`
+    //   <p>${useremail} 계정으로 로그인 되었습니다.</p>
+    // `);
+
+    const user = await findUserByEmail(useremail);
+    return response.status(200).json(user);
   } else {
     // false인 경우, 패스워드가 유효하지 않은 사용자 실패!
     return response.status(400).send(`
@@ -80,12 +81,11 @@ app.post('/api/signup', async (request, response) => {
       response.status(201).json(user);
     } else {
       response.status(400).json({
-        name: '등록된 사용자 확인',
         message: `${username}님은 ${useremail} 이메일 주소로 회원 가입을 이미 하셨습니다. 😥`,
       });
     }
   } catch (error) {
-    response.status(500).send('회원가입에 문제가 발생했습니다.');
+    response.status(500).json(error);
   }
 });
 
