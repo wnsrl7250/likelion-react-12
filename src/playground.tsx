@@ -17,7 +17,10 @@ function Playground() {
   const isSignInView = uiView.includes('signin');
 
   return (
-    <div className="Playground" style={{ background: '#d7dadf' }}>
+    <div
+      className="Playground bg-stone-300/80"
+      // style={{ background: '#d7dadf' }}
+    >
       <h1>플레이그라운드</h1>
       <Nav />
       {isSignInView ? <HomeworkSignIn /> : <HomeworkSignUpForm />}
