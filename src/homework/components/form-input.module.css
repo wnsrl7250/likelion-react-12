@@ -18,7 +18,7 @@
     button {
       --size: 24px;
 
-      display: flex;
+      /* display: flex;
       justify-content: center;
       align-items: center;
       inline-size: var(--size);
@@ -27,11 +27,11 @@
       border-radius: 6px;
       border: 0;
       padding: 0;
-      line-height: 1;
+      line-height: 1; */
 
-      &:hover:not(:disabled, &[aria-disabled="true"]) {
+      /* &:hover:not(:disabled, &[aria-disabled="true"]) {
         background-color: rgba(0 0 0 / 10%);
-      }
+      } */
     }
   }
 

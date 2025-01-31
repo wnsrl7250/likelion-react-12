@@ -2,6 +2,7 @@ import S from './form-input.module.css';
 
 import { type ComponentProps, useId, useState } from 'react';
 import { IconEyeOff, IconEyeOn } from './icon-eye';
+import ToggleButton from './toggle-button';
 
 type FormInputProps = ComponentProps<'input'> & {
   label: string;
@@ -26,7 +27,7 @@ function FormInput({
     type = 'text';
   }
 
-  const buttonLabel = isOff ? '표시' : '감춤';
+  const buttonLabel = `패스워드 ${isOff ? '표시' : '감춤'}`;
 
   return (
     <div className={S.formInput}>
@@ -34,14 +35,14 @@ function FormInput({
       <div className={S.group}>
         <input type={type} id={id} {...inputProps} />
         {hasToggleButton && (
-          <button
-            type="button"
-            title={`패스워드 ${buttonLabel}`}
+          <ToggleButton
+            label={buttonLabel}
+            title={buttonLabel}
+            offRender={<IconEyeOff />}
+            onRender={<IconEyeOn />}
+            isOff={isOff}
             onClick={handleToggle}
-          >
-            {isOff ? <IconEyeOff /> : <IconEyeOn />}
-            <span className="sr-only">패스워드 {buttonLabel}</span>
-          </button>
+          />
         )}
       </div>
     </div>

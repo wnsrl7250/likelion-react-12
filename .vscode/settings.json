@@ -153,6 +153,7 @@
   // 참고: https://github.com/paolotiu/tailwind-intellisense-regex-list?tab=readme-ov-file#readme
   "tailwindCSS.experimental.classRegex": [
     ["Styles\\s*(?::\\s*[^=]+)?\\s*=\\s*([^;]*);", "['\"`]([^'\"`]*)['\"`]"],
+    ["classes\\s*(?::\\s*[^=]+)?\\s*=\\s*([^;]*);", "['\"`]([^'\"`]*)['\"`]"],
     ["clsx\\(.*?\\)(?!\\])", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"],
     ["classnames\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
   ],
@@ -161,7 +162,8 @@
     "javascriptreact": "html",
     "plaintext": "html"
   },
-  "tailwindCSS.experimental.configFile": "./tailwind.config.js",
+  // "tailwindCSS.experimental.configFile": "./tailwind.config.js",
+  "tailwindCSS.experimental.configFile": "./src/styles/tailwind.css",
   "tailwind-fold.foldStyle": "QUOTES",
   "tailwind-fold.unfoldIfLineSelected": true,
   "tailwind-fold.unfoldedTextOpacity": 0.9,
