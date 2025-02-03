@@ -5,4 +5,4 @@ export default function twMerge(...inputs: ClassValue[]) {
   return _twMerge(clsx(...inputs));
 }
 
-export const tm /* twMerge */ = twMerge;
+export const tm = twMerge;
