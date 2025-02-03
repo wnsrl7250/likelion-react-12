@@ -1,9 +1,4 @@
-import { ComponentProps } from 'react';
-
-type IconProp = ComponentProps<'svg'> & {
-  size?: number | string;
-  fill?: string;
-};
+import type { IconProp } from '@/types/icon';
 
 export function IconEyeOff({ size = 16, fill = '#000' }: IconProp) {
   return (

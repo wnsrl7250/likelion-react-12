@@ -1,10 +1,9 @@
-import S from './form-input.module.css';
+import { useId, useState } from 'react';
+import { IconEyeOff, IconEyeOn } from '../icon-eye';
+import ToggleButton from '../toggle-button';
+import S from './style.module.css';
 
-import { type ComponentProps, useId, useState } from 'react';
-import { IconEyeOff, IconEyeOn } from './icon-eye';
-import ToggleButton from './toggle-button';
-
-type FormInputProps = ComponentProps<'input'> & {
+type FormInputProps = React.ComponentProps<'input'> & {
   label: string;
   hasToggleButton?: boolean;
   hasError?: Error | null;

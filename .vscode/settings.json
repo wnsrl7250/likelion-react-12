@@ -77,9 +77,9 @@
   "editor.wordWrap": "off",
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
     // "source.organizeImports": "explicit",
     // "source.addMissingImports": "explicit",
-    // "source.fixAll.eslint": "explicit",
   },
 
   "javascript.autoClosingTags": true,

@@ -1,6 +1,6 @@
-import './nav.css';
 import { useState } from 'react';
-import { getUIView, type UIView } from '@/lib/ui-view';
+import { getUIView, type UIView } from '@/homework/lib/ui-view';
+import './style.css';
 
 function Nav() {
   const [uiView] = useState<UIView>(getUIView);

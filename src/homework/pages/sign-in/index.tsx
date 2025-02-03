@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import S from './sign-in.module.scss';
-import { isEmail, isPassword } from '../../lib/validator';
-import ActionButton from '../components/action-button';
-import FormInput from '../components/form-input';
+import S from './style.module.scss';
+import { isEmail, isPassword } from '@/homework/lib/validator';
+import ActionButton from '@/homework/components/action-button';
+import FormInput from '@/homework/components/form-input';
 
 interface SignInFormData {
   useremail: string;
@@ -16,7 +16,7 @@ interface EventData {
   value: string;
 }
 
-function HomeworkSignIn() {
+function HomeworkSignInForm() {
   const [formData, setFormData] = useState<SignInFormData>({
     useremail: '',
     userpassword: '',
@@ -107,4 +107,4 @@ function HomeworkSignIn() {
   );
 }
 
-export default HomeworkSignIn;
+export default HomeworkSignInForm;
