@@ -2,14 +2,7 @@ import { useState } from 'react';
 import Nav from './homework/components/nav';
 import HomeworkSignIn from './homework/pages/sign-in';
 import HomeworkSignUpForm from './homework/pages/sign-up';
-
-const getUIView = () => {
-  const searchParams = new URLSearchParams(location.search);
-  const uiView = searchParams.get('view') ?? 'signin';
-  return uiView as UIView;
-};
-
-type UIView = 'signin' | 'signup';
+import { getUIView, type UIView } from './lib/ui-view';
 
 function Playground() {
   const [uiView] = useState<UIView>(getUIView);

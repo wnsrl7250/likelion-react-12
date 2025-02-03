@@ -1,24 +1,60 @@
+import { useState } from 'react';
+import S from './sign-in.module.scss';
+import { isEmail, isPassword } from '../../lib/validator';
 import ActionButton from '../components/action-button';
 import FormInput from '../components/form-input';
-import S from './sign-in.module.scss';
-import { useState } from 'react';
 
-interface SignInForm {
+interface SignInFormData {
   useremail: string;
   userpassword: string;
 }
 
+type SignInError = Record<keyof SignInFormData, Error | null>;
+
+interface EventData {
+  name: keyof SignInFormData;
+  value: string;
+}
+
 function HomeworkSignIn() {
-  const [formData, setFormData] = useState<SignInForm>({
+  const [formData, setFormData] = useState<SignInFormData>({
     useremail: '',
     userpassword: '',
   });
 
+  const [error, setError] = useState<SignInError>({
+    useremail: null,
+    userpassword: null,
+  });
+
   const isAllInputted =
     formData.useremail.length > 0 && formData.userpassword.length > 0;
+  const isAllValid = Object.values(error).every((e) => e === null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.currentTarget as EventData;
+
+    switch (name) {
+      case 'useremail': {
+        setError((error) => ({
+          ...error,
+          useremail: !isEmail(value)
+            ? new Error('올바른 이메일 형식을 입력하세요.')
+            : null,
+        }));
+        break;
+      }
+      case 'userpassword': {
+        setError((error) => ({
+          ...error,
+          userpassword: !isPassword(value, { min: 6 })
+            ? new Error('숫자, 영문 조합 6자리 이상 입력하세요.')
+            : null,
+        }));
+        break;
+      }
+    }
+
     const nextFormData = {
       ...formData,
       [name]: value,
@@ -29,6 +65,9 @@ function HomeworkSignIn() {
 
   const handleSignIn = async (formData: FormData) => {
     if (!isAllInputted) return;
+    if (!isAllValid) {
+      return alert('입력 내용 중에 오류가 있습니다.');
+    }
 
     const response = await fetch('http://localhost:4000/api/signin', {
       method: 'POST',
@@ -50,6 +89,7 @@ function HomeworkSignIn() {
           placeholder="user@company.io"
           value={formData.useremail}
           onChange={handleChange}
+          hasError={error.useremail}
         />
         <FormInput
           type="password"
@@ -59,6 +99,7 @@ function HomeworkSignIn() {
           hasToggleButton
           value={formData.userpassword}
           onChange={handleChange}
+          hasError={error.userpassword}
         />
         <ActionButton aria-disabled={!isAllInputted}>로그인</ActionButton>
       </form>

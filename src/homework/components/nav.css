@@ -11,8 +11,13 @@
 
     a {
       color: #464444;
+      padding: 4px;
 
-      &:hover:not(:focus) {
+      &.active {
+        font-weight: 800;
+      }
+
+      &:hover:not(:focus, &.active) {
         color: #9a7645;
       }
     }
