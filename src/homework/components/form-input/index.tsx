@@ -17,6 +17,7 @@ function FormInput({
   ...inputProps
 }: FormInputProps) {
   const id = useId();
+  const descId = useId();
 
   const [isOff, setIsOff] = useState(true);
 
@@ -24,9 +25,7 @@ function FormInput({
     setIsOff((isOff) => !isOff);
   };
 
-  if (type === 'password' && !isOff) {
-    type = 'text';
-  }
+  const inputType = type === 'password' && !isOff ? 'text' : type;
 
   const buttonLabel = `패스워드 ${isOff ? '표시' : '감춤'}`;
 
@@ -35,7 +34,12 @@ function FormInput({
       <div className={S.formInput}>
         <label htmlFor={id}>{label}</label>
         <div className={S.group}>
-          <input type={type} id={id} {...inputProps} />
+          <input
+            id={id}
+            type={inputType}
+            aria-describedby={descId}
+            {...inputProps}
+          />
           {hasToggleButton && (
             <ToggleButton
               type="button"
@@ -50,7 +54,12 @@ function FormInput({
         </div>
       </div>
       {hasError && (
-        <p role="alert" className="text-red-700 font-medium text-[13px] pl-4">
+        <p
+          id={descId}
+          role="alert"
+          aria-live="assertive"
+          className="text-red-700 font-medium text-[13px] pl-4"
+        >
           {hasError.message}
         </p>
       )}
