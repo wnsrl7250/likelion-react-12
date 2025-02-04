@@ -1,6 +1,6 @@
-import clsx from 'clsx/lite';
 import { useState } from 'react';
 import { getUIView, type UIView } from '@/homework/lib/ui-view';
+import NavLink from './nav-link';
 import './style.css';
 
 function Nav() {
@@ -15,27 +15,15 @@ function Nav() {
   return (
     <nav className="nav">
       <h2 className="sr-only">페이지 탐색</h2>
-      <a
-        href="/?view=signin"
-        className={clsx(isSignInView && 'active')}
-        aria-current={isSignInView ? 'page' : undefined}
-      >
+      <NavLink href="signin" isActive={isSignInView}>
         로그인
-      </a>
-      <a
-        href="/?view=signup"
-        className={clsx(isSignUpView && 'active')}
-        aria-current={isSignUpView ? 'page' : undefined}
-      >
+      </NavLink>
+      <NavLink href="signup" isActive={isSignUpView}>
         회원가입
-      </a>
-      <a
-        href="/?view=state-management"
-        className={clsx(isStateManagementView && 'active')}
-        aria-current={isStateManagementView ? 'page' : undefined}
-      >
+      </NavLink>
+      <NavLink href="state-management" isActive={isStateManagementView}>
         상태 관리 전략
-      </a>
+      </NavLink>
     </nav>
   );
 }
