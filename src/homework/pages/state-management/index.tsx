@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { type AccordionItemType } from './components/accordion-item';
-import { AccordionOpenedCount } from './components/accordion-opened-count';
+// import { AccordionOpenedCount } from './components/accordion-opened-count';
 import AccordionList from './components/accordion-list';
 
 const INITIAL_ACCORDION_ITEMS: AccordionItemType[] = [
@@ -46,10 +46,10 @@ function StateManagement() {
   );
 
   // [파생된 상태]
-  const openedItemCount = items.reduce(
-    (count, item) => count + (item.open ? 1 : 0),
-    0
-  );
+  // const openedItemCount = items.reduce(
+  //   (count, item) => count + (item.open ? 1 : 0),
+  //   0
+  // );
 
   // [이벤트 핸들러 생성 함수 -> 이벤트 핸들러 반환 -> 상태 업데이트 로직 포함]
   const generateUpdateHandler = (index: number) => () => {
@@ -68,11 +68,18 @@ function StateManagement() {
         items={items}
         generateUpdateHandler={generateUpdateHandler}
       />
-      <AccordionOpenedCount className="fixed -top-4 right-0">
-        {openedItemCount}
-      </AccordionOpenedCount>
+      <DoNotRenderUnnecessary />
     </section>
   );
 }
 
 export default StateManagement;
+
+function DoNotRenderUnnecessary() {
+  return (
+    <article>
+      <h3>나는 상태 공유를 원하지 않아요~</h3>
+      <p>상태 공유해주지 마세요. 저는 다시 렌더링 되고 싶지 않답니다. 🥲</p>
+    </article>
+  );
+}
