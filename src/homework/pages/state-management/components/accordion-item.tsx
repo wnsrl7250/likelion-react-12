@@ -21,7 +21,6 @@ function AccordionItem({
   onUpdate,
 }: AccordionItemProps) {
   const handleToggle = () => {
-    console.log('toggle');
     onUpdate?.();
   };
 
@@ -48,7 +47,7 @@ function AccordionItem({
           // @staring-style
           'starting:opacity-0 starting:-translate-y-2 starting:h-0',
           // 전환(transition)
-          'transition-all transition-discrete duration-700 delay-100',
+          'transition-all transition-discrete duration-400 ease-in-out',
           // [to]
           { 'opacity-100 translate-y-0 h-30': open }
         )}

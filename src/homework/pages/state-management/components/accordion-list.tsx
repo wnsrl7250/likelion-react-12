@@ -44,39 +44,25 @@ const INITIAL_ACCORDION_ITEMS: AccordionItemType[] = [
 ];
 
 function AccordionList({ title }: AccordionListProps) {
-  // 하위 컴포넌트가 가진 상태를 제거하고, 상위 컴포넌트로 상태를 끌어올린다.
-  // 다만, 하위 컴포넌트 개별 상태를 효과적으로 관리하려면 집합 형태로 관리가 필요하다.
   // [상태]
   const [items, setItems] = useState<AccordionItemType[]>(
     INITIAL_ACCORDION_ITEMS
   );
 
-  // [상태 업데이트 함수]
+  // [파생된 상태]
+  const openedItemCount = items.reduce(
+    (count, item) => count + (item.open ? 1 : 0),
+    0
+  );
 
-  // general function
-  // const generateUpdateHandler = function (index: number) {
-  //   // 이벤트 핸들러 생성 함수 (이벤트 핸들러 함수 반환)
-  //   return function handleUpdateItem() {
-  //     console.log(`update ${index} item opended`);
-  //   };
-  // };
-
-  // arrow function
+  // [이벤트 핸들러 생성 함수 -> 이벤트 핸들러 반환 -> 상태 업데이트 로직 포함]
   const generateUpdateHandler = (index: number) => () => {
-    // 상태 변수 업데이트 로직 작성
     const nextItems = items.map((item, i) => {
       return index !== i ? item : { ...item, open: !item.open };
     });
 
     setItems(nextItems);
   };
-
-  // [파생된 상태]
-  // items 배열의 원소(아이템, 항목) 중 open 상태인 것은 몇 개인가요?
-  const openedItemCount = items.reduce(
-    (count, item) => count + (item.open ? 1 : 0),
-    0
-  );
 
   return (
     <article className={tm('flex flex-col space-y-4 items-center', 'mt-10')}>
