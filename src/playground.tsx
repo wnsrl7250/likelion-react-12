@@ -5,6 +5,7 @@ import StateManagement from '@/homework/pages/state-management';
 import SignInForm from '@/homework/pages/sign-in';
 import SignUpForm from '@/homework/pages/sign-up';
 import TicTacToe from './homework/pages/tic-tac-toe';
+import ErrorBoundaryDemo from './homework/pages/error-boundary';
 
 const getViewElement = (uiView: string) => {
   let viewElement: React.ReactElement | null = null;
@@ -24,6 +25,10 @@ const getViewElement = (uiView: string) => {
     }
     case 'tic-tac-toe': {
       viewElement = <TicTacToe />;
+      break;
+    }
+    case 'error-boundary': {
+      viewElement = <ErrorBoundaryDemo />;
       break;
     }
   }
