@@ -12,6 +12,11 @@ export const enum PLAYER {
 
 export type Cells = (PLAYER | null)[];
 
+// 다음 플레이어 반환 함수
+export const getNextPlayer = (order: number) => {
+  return order % 2 === 0 ? PLAYER.ONE : PLAYER.TWO;
+};
+
 // 게임 승리 조건
 const WINNER_CONDITIONS = [
   [0, 1, 2],
@@ -47,4 +52,25 @@ export const getWinner = (cells: Cells) => {
   }
 
   return winner as Winner;
+};
+
+// 게임 상태 메시지 반환 함수
+export const getStatusMessage = (
+  nextPlayer: PLAYER,
+  winner: Winner,
+  cells: Cells
+) => {
+  let statusMessage = `넥스트 플레이어 ${nextPlayer}`;
+
+  if (winner) {
+    statusMessage = `위너! ${winner.player}`;
+  }
+
+  const isDraw = !winner && cells.every(Boolean);
+
+  if (isDraw) {
+    statusMessage = '비겼습니다! 😵‍💫';
+  }
+
+  return statusMessage;
 };
