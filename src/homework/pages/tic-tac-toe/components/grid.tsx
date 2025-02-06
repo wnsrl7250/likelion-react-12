@@ -5,7 +5,7 @@ import type { Winner, Cells } from '../constants';
 interface GridProps {
   cells: Cells;
   winner: Winner;
-  onPlay: (cellIndex: number) => void;
+  onPlay?: (cellIndex: number) => void;
 }
 
 function Grid({ cells, winner, onPlay }: GridProps) {
@@ -27,7 +27,7 @@ function Grid({ cells, winner, onPlay }: GridProps) {
           <Cell
             key={index}
             className={winnerClasses}
-            onPlay={() => onPlay(index)}
+            onPlay={() => onPlay?.(index)}
           >
             {cell}
           </Cell>
