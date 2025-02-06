@@ -25,7 +25,7 @@ const WINNER_CONDITIONS = [
 ];
 
 // 게임 진행 검사 -> 게임 위너 반환 함수
-type Winner = {
+export type Winner = {
   player: PLAYER;
   condition: [number, number, number];
 } | null;
