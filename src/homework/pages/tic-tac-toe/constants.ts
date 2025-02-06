@@ -2,15 +2,17 @@
 // 게임 진행을 위한 상수 및 함수
 // ----------------------------------------------
 
-/* const INITIAL_CELLS = [null, null, null, null, null, null, null, null, null]; */
-export const INITIAL_CELLS = Array(9).fill(null);
-
 export const enum PLAYER {
   ONE = '😎',
   TWO = '🤢',
 }
 
-export type Cells = (PLAYER | null)[];
+export type Cell /* BoardPlayer */ = PLAYER | null;
+
+export type Cells /* Board */ = Cell[];
+
+/* const INITIAL_CELLS = [null, null, null, null, null, null, null, null, null]; */
+export const INITIAL_CELLS: Cells = Array(9).fill(null);
 
 // 다음 플레이어 반환 함수
 export const getNextPlayer = (order: number) => {
