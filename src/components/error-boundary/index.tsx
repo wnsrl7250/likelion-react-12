@@ -1,7 +1,8 @@
-import { tm } from '@/utils/tw-merge';
 import { Component, type ErrorInfo } from 'react';
+import ErrorFallbackUI from './error-fallback-ui';
 
 interface Props {
+  FallbackComponent?: typeof ErrorFallbackUI;
   children: React.ReactNode;
 }
 
@@ -40,26 +41,12 @@ class ErrorBoundary extends Component<Props, State> {
     // 대체(fallback) 컴포넌트를 렌더링
     if (this.state.hasError) {
       const { error, errorInfo } = this.state;
+      const { FallbackComponent } = this.props;
 
-      return (
-        <div
-          role="alert"
-          className={tm(
-            'overflow-x-scroll',
-            'flex flex-col gap-2',
-            'border-4 border-red-600',
-            'p-5',
-            ' text-red-600'
-          )}
-        >
-          <h2 className={tm('text-xl font-semibold')}>
-            {error?.name} 오류 발생!
-          </h2>
-          <p className={tm('text-red-700 font-normal')}>{error?.message}</p>
-          <pre className="-ml-8 text-xs leading-[2]">
-            {errorInfo?.componentStack}
-          </pre>
-        </div>
+      return FallbackComponent ? (
+        <FallbackComponent error={error} errorInfo={errorInfo} />
+      ) : (
+        <ErrorFallbackUI error={error} errorInfo={errorInfo} />
       );
     }
 
