@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------
 // 클래스 컴포넌트 라이프사이클 메서드
 import { tm } from '@/utils/tw-merge';
-import { Component } from 'react';
+import { Component, ErrorInfo } from 'react';
 
 // 속성(props)
 interface Props {
@@ -17,6 +17,8 @@ type RequiredProps = Required<Props>;
 interface State {
   count: number;
   doubleCount?: number;
+  error: null | Error;
+  errorInfo: null | ErrorInfo;
 }
 
 class Counter extends Component<Props, State> {
@@ -67,6 +69,8 @@ class Counter extends Component<Props, State> {
   // <클래스 필드>
   state: State = {
     count: this.props.count ?? Counter.defaultProps.count,
+    error: null,
+    errorInfo: null,
   };
 
   // [라이프사이클 메서드] ---------------------------------------------
@@ -188,8 +192,26 @@ class Counter extends Component<Props, State> {
     clearInterval(this.clearIntervalId);
   }
 
+  // [라이프사이클 메서드] ---------------------------------------------
+  // 정적(클래스) 멤버
+  static getDerivedStateFromError(error: Error) {
+    return {
+      error,
+    };
+  }
+
+  // 인스턴스 멤버
+  // 오류 감지(error catch)
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    this.setState({
+      error,
+      errorInfo, // { componentStack, digest }
+    });
+  }
+
   // <클래스 필드>
   // 이벤트 핸들러 ---------------------------------------------------
+  // [이벤트 핸들러]
   handleDecrease = () => {
     const { step } = this.props;
 
