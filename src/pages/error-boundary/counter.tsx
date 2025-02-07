@@ -18,7 +18,7 @@ function Counter({
   const [count, setCount] = useState(initialCount);
 
   // [파생된 상태: derived state form state]
-  const doubleCount = count * 2;
+  const doubleCounts = count * 2;
 
   // [이벤트 핸들러: event handlers]
   const handleDecrease = () => {
@@ -37,7 +37,7 @@ function Counter({
   return (
     <div className={tm('flex flex-col gap-2 items-start')}>
       <output className={tm('font-semibold text-3xl text-react')}>
-        {count} {doubleCount}
+        {count} {doubleCounts}
       </output>
       <div className={tm('flex', '*:hover:bg-sky-800 *:cursor-pointer')}>
         <button
