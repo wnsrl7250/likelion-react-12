@@ -58,14 +58,24 @@ class Counter extends Component<Props, State> {
     // console.log(this.state);
 
     return (
-      <div className={tm('flex flex-col gap-3 items-start')}>
-        <h2>카운터</h2>
-        <output>{this.state.count}</output>
-        <div className={tm('flex gap-2')}>
-          <button type="button" onClick={this.handleDecrease}>
+      <div className={tm('flex flex-col gap-2 items-start')}>
+        <h2 className="sr-only">카운터</h2>
+        <output className={tm('font-semibold text-3xl text-react')}>
+          {this.state.count}
+        </output>
+        <div className={tm('flex', '*:hover:bg-sky-800 *:cursor-pointer')}>
+          <button
+            type="button"
+            className={tm('px-6 py-1 bg-react text-white rounded-l-full')}
+            onClick={this.handleDecrease}
+          >
             -{this.props.step}
           </button>
-          <button type="button" onClick={this.handleIncrease}>
+          <button
+            type="button"
+            className={tm('px-6 py-1 bg-react text-white rounded-r-full')}
+            onClick={this.handleIncrease}
+          >
             +{this.props.step}
           </button>
         </div>
@@ -73,30 +83,55 @@ class Counter extends Component<Props, State> {
     );
   }
 
+  // <클래스 필드>
+  clearIntervalId: NodeJS.Timeout | number = 0;
+
   // [라이프사이클 메서드] ---------------------------------------------
   // 컴포넌트 마운트(component did mount) 이후 시점
+
   componentDidMount() {
     // 리액트 렌더링 프로세스와 상관없는 이펙트 실행 (사이드 이펙트 처리)
-    // const clearId = setTimeout(() => {
-    //   alert('타이머(사이드 이펙트) 처리');
-    //   clearTimeout(clearId);
-    //   console.log('타이머 클리어!');
-    // }, 2000);
+    // const clearId =
+
+    // 타이머 이벤트 구독
+    console.log('타이머 이벤트 구독');
+    this.clearIntervalId = setInterval(() => {
+      console.log(new Date().toLocaleTimeString());
+      // alert('타이머(사이드 이펙트) 처리');
+      // clearTimeout(clearId);
+      // console.log('타이머 클리어!');
+    }, 1000);
   }
 
   // 컴포넌트 업데이트(component did update) 이후 시점
   componentDidUpdate(
-    prevProps: Readonly<Props>,
+    _prevProps: Readonly<Props>,
     prevState: Readonly<State>
   ): void {
     console.group('이전 상태 값');
-    console.log({ prevProps });
-    console.log({ prevState });
+    // console.log({ prevProps });
+    console.log(prevState.count);
     console.groupEnd();
 
     console.group('현재 상태 값');
-    console.log(this.state);
+    console.log(this.state.count);
     console.groupEnd();
+
+    // 사이드 이펙트
+    // 리액트 렌더링 프로세스와 상관없는 일 처리
+    if (this.state.count > 9) {
+      document.body.classList.add('bg-react', 'text-white');
+    } else {
+      document.body.classList.remove('bg-react', 'text-white');
+    }
+  }
+
+  // 컴포넌트 언마운트(component will unmount) 이전 시점
+  componentWillUnmount() {
+    console.log('Counter 언마운트 될 예정');
+    // 타이머 이벤트 구독 해지
+    console.log('타이머 이벤트 구독 해지');
+    // clearInterval(this.clearIntervalId);
   }
 
   // <클래스 필드>
