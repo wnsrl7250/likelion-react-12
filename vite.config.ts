@@ -1,3 +1,4 @@
+import { reactClickToComponent } from 'vite-plugin-react-click-to-component';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +23,7 @@ const viteConfig = defineConfig((env) => {
         // },
       }),
       tailwindcss(),
+      reactClickToComponent(),
     ],
     server: {
       host: 'localhost',
