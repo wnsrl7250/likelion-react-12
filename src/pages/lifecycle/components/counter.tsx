@@ -16,6 +16,7 @@ type RequiredProps = Required<Props>;
 // 상태(state)
 interface State {
   count: number;
+  doubleCount?: number;
 }
 
 class Counter extends Component<Props, State> {
@@ -45,10 +46,48 @@ class Counter extends Component<Props, State> {
     // this.handleIncrease = this.handleIncrease.bind(this);
   }
 
+  // [라이프사이클 메서드] ---------------------------------------------
+  // 외부 데이터(props)로부터 파생된 상태(derived state) 설정 시점
+  static getDerivedStateFromProps(
+    _props: Readonly<RequiredProps>,
+    state: Readonly<State>
+  ) {
+    // console.log(
+    //   '외부 데이터(props)로부터 파생된 상태(derived state) 설정 시점'
+    // );
+    // console.log(props);
+
+    // 파생된 상태 (derived state)
+    return {
+      // doubleCount: props.count * 2,
+      doubleCount: state.count * 2,
+    };
+  }
+
   // <클래스 필드>
-  state = {
+  state: State = {
     count: this.props.count ?? Counter.defaultProps.count,
   };
+
+  // [라이프사이클 메서드] ---------------------------------------------
+  // 컴포넌트 렌더링 진행 유무 결정 시점
+  // <주의!!!> 오직 성능 최적화 만을 위해 사용!!
+  shouldComponentUpdate(
+    nextProps: Readonly<RequiredProps>,
+    nextState: Readonly<State>
+  ): boolean {
+    if (nextProps.max < nextState.count) {
+      console.log('렌더링 차단');
+      return false;
+    }
+
+    return true;
+
+    // 렌더링 해라
+    // return true;
+    // 렌더링 하지마라
+    // return false;
+  }
 
   // [라이프사이클 메서드] ---------------------------------------------
   // 렌더(render) 시점
@@ -61,7 +100,7 @@ class Counter extends Component<Props, State> {
       <div className={tm('flex flex-col gap-2 items-start')}>
         <h2 className="sr-only">카운터</h2>
         <output className={tm('font-semibold text-3xl text-react')}>
-          {this.state.count}
+          {this.state.count} {this.state.doubleCount}
         </output>
         <div className={tm('flex', '*:hover:bg-sky-800 *:cursor-pointer')}>
           <button
@@ -131,7 +170,7 @@ class Counter extends Component<Props, State> {
     console.log('Counter 언마운트 될 예정');
     // 타이머 이벤트 구독 해지
     console.log('타이머 이벤트 구독 해지');
-    // clearInterval(this.clearIntervalId);
+    clearInterval(this.clearIntervalId);
   }
 
   // <클래스 필드>
