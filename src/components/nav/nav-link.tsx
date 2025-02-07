@@ -1,5 +1,5 @@
-import { getView, setView } from '@/router/manage-view';
 import { tm } from '@/utils/tw-merge';
+import { getView, setView } from '@/router/manage-view';
 
 type WithoutHref = Omit<React.ComponentProps<'a'>, 'href'>;
 type OnChangeRoute = React.Dispatch<React.SetStateAction<string>>;
@@ -26,6 +26,7 @@ function NavLink({
     e.preventDefault();
     // 프로그래밍 방식 내비게이션 설정
     onChangeRoute(href);
+    // Playground 컴포넌트의 상태 업데이트 요청
     setView(href);
   };
 
