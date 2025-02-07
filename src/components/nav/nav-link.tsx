@@ -22,7 +22,9 @@ function NavLink({
   const isActive = view.includes(href);
 
   const handleRoute = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // 네이티브 이벤트 시스템 중단
     e.preventDefault();
+    // 프로그래밍 방식 내비게이션 설정
     onChangeRoute(href);
     setView(href);
   };
