@@ -135,6 +135,7 @@ class Counter extends Component<Props, State> {
     // ui가 부자연 스러우면... 스냅샷 데이터 반환
     // snapshot 데이터
     // return snapshot;
+    return null;
   }
 
   // <클래스 필드>
