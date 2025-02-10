@@ -54,30 +54,25 @@ function SideEffectDemo() {
   );
 
   // --------------------------------------------------------------------------
+  // 마운트 이후 또는 관심을 둔 상태가 변경될 때 마다 이펙트 처리
+  // 종속성 배열에 반응성 상태 추가 [message, anotherStateVariable, prop, ...]
+  // 클래스 컴포넌트의 componentDidMount + componentDidUpdate 라이프 사이클 메서드와 유사
+  useEffect(() => {
+    console.log('[state] in SideEffectDemo Component\n', { message });
+  }, [message]);
+
+  // useEffect(() => {
+  //   console.log({ isMounted });
+  // }, [isMounted]);
+
+  // --------------------------------------------------------------------------
 
   return (
     <section className="*:text-slate-800">
       <h2 className="text-2xl font-medium mb-2">React.useEffect 훅 함수</h2>
       <div className="flex gap-3 items-center">
         <p>Console 패널을 열고 🧤 버튼을 눌러보세요.</p>
-        <button
-          type="button"
-          title="🧤 추가"
-          className={tm(
-            'cursor-pointer select-none',
-            'rounded-md py-0.5 px-1.5 border-2 border-react',
-            'hover:bg-react/10 '
-          )}
-          onClick={() => {
-            console.group('상태 업데이트');
-            console.log('[전]', message);
-            setMessage((message) => message + '🧤');
-            console.log('[후]', message);
-            console.groupEnd();
-          }}
-        >
-          🧤 <span className="sr-only">추가</span>
-        </button>
+        <Button message={message} onMessage={setMessage} />
       </div>
 
       <p
@@ -93,3 +88,38 @@ function SideEffectDemo() {
 }
 
 export default SideEffectDemo;
+
+// --------------------------------------------------------------------------
+
+function Button({
+  message,
+  onMessage,
+}: {
+  message: string;
+  onMessage: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  useEffect(() => {
+    console.log('[props] in Button Component\n', { message });
+  }, [message]);
+
+  return (
+    <button
+      type="button"
+      title="🧤 추가"
+      className={tm(
+        'cursor-pointer select-none',
+        'rounded-md py-0.5 px-1.5 border-2 border-react',
+        'hover:bg-react/10 '
+      )}
+      onClick={() => {
+        // console.group('상태 업데이트');
+        // console.log('[전]', message);
+        onMessage((message) => message + '🧤');
+        // console.log('[후]', message);
+        // console.groupEnd();
+      }}
+    >
+      🧤 <span className="sr-only">추가</span>
+    </button>
+  );
+}
