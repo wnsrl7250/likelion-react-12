@@ -6,11 +6,13 @@ import App from '@/app';
 const root = document.getElementById('root');
 
 if (root) {
-  createRoot(root, {
+  const reactDOMRoot = createRoot(root, {
     identifierPrefix: 'euid-',
-  }).render(
-    <>
+  });
+
+  reactDOMRoot.render(
+    <StrictMode>
       <App />
-    </>
+    </StrictMode>
   );
 }
