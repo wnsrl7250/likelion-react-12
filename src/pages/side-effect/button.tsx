@@ -7,9 +7,9 @@ interface ButtonProps {
 }
 
 function Button({ message, onMessage }: ButtonProps) {
-  useEffect(() => {
-    console.log('[props 변경 감지]\nButton 컴포넌트 내부\n', { message });
-  }, [message]);
+  // useEffect(() => {
+  //   console.log('[props 변경 감지]\nButton 컴포넌트 내부\n', { message });
+  // }, [message]);
 
   return (
     <button
