@@ -9,8 +9,8 @@ if (root) {
   createRoot(root, {
     identifierPrefix: 'euid-',
   }).render(
-    <StrictMode>
+    <>
       <App />
-    </StrictMode>
+    </>
   );
 }
