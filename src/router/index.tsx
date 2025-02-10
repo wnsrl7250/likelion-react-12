@@ -12,8 +12,12 @@ import NotFound from '@/pages/not-found';
 
 export const navList = [
   { path: 'side-effect', text: '이펙트 처리', element: <SideEffectDemo /> },
+  {
+    path: 'error-boundary',
+    text: '에러 바운더리',
+    element: <ErrorBoundaryDemo />,
+  },
   { path: 'lifecycles', text: '라이프 사이클', element: <LifecycleDemo /> },
-  { path: 'error-boundary', text: '오류 경계', element: <ErrorBoundaryDemo /> },
   { path: 'tic-tac-toe', text: '틱택토', element: <TicTacToe /> },
   {
     path: 'state-management',
