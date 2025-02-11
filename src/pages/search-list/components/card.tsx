@@ -1,7 +1,13 @@
-function Card() {
+import { ColorMoodItem } from '../types';
+
+interface CardProps {
+  item: ColorMoodItem;
+}
+
+function Card({ item }: CardProps) {
   return (
     <article>
-      <h4>카드 제목</h4>
+      <h4>{item.title}</h4>
     </article>
   );
 }

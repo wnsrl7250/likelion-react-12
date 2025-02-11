@@ -72,6 +72,3 @@ const colorMoodList = [
 ];
 
 export default colorMoodList;
-
-export type ColorMoodList = typeof colorMoodList;
-export type ColorMoodItem = ColorMoodList[number];
