@@ -52,6 +52,7 @@
     "vite-plugin-react-click-to-component": "3.1.0"
   },
   "dependencies": {
+    "@mynaui/icons-react": "0.3.3",
     "clsx": "2.1.1",
     "lodash-es": "4.17.21",
     "react": "19",
