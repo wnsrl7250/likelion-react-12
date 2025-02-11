@@ -1,74 +1,73 @@
+import { useEffect, useId, useState } from 'react';
+import { tm } from '@/utils/tw-merge';
 import throttle from '@/utils/throttle';
-import { useEffect, useState } from 'react';
+import debounce from '@/utils/debounce';
 
 function SideEffectDemo() {
-  // 관심사 별 묶음(상태, 파생된 상태, 상태 업데이트 로직 포함하는 이벤트 핸들러, 종속성 배열에 상태가 포함된 이펙트)
-
-  // [상태]
-  const [count, setCount] = useState(10); // 10
-
-  // [파생된 상태]
-  const doubleCount = count ** 2; // 100
-
-  // [이벤트 핸들러]
-  const handleChangeCount = () => setCount((c) => c + 2);
-
-  // [이펙트]
-  useEffect(() => {
-    console.log({ updatedCountValue: count, doubleCount });
-  }, [count, doubleCount]);
-
-  // --------------------------------------------------------------------------
-
-  // [상태]
+  const throttleTimeId = useId();
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  // [파생된 상태]
-  const mouseOverTheCenterOfTheScreen = mouse.x > globalThis.innerWidth / 2;
+  // [상태]
+  const [throttleTime, setThrottleTime] = useState(500);
+
+  // [이벤트 핸들러: 상태 업데이트 로직 포함]
+  // JSX에 연결되는 이벤트 핸들러의 경우, 쓰로틀 또는
+  // 디바운스를 사용해 이벤트 발생 빈도를 조절해야 한다면
+  // value가 아닌, defaultValue 속성을 사용해야 한다.
+  const handleChangeThrottleTime = debounce(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const nextThrottleTime = Number(e.target.value);
+      setThrottleTime(nextThrottleTime);
+    },
+    300
+  );
 
   // [이펙트]
-  // mouseOverTheCenterOfTheScreen 파생된 상태가 변경될 때마다 이펙트 함수 실행
   useEffect(() => {
-    console.log({ mouseOverTheCenterOfTheScreen });
-
-    // 명령형 프로그래밍
-    // if (mouseOverTheCenterOfTheScreen) {
-    //   document.body.classList.add('bg-white', 'text-react');
-    // } else {
-    //   document.body.classList.remove('bg-white', 'text-react');
-    // }
-  }, [mouseOverTheCenterOfTheScreen]);
-
-  // 마운트 시, 1회 이벤트 구독/취소 설정
-  useEffect(() => {
-    // [이벤트 핸들러]
-    // JSX에서 해당 이벤트 핸들러를 사용하는 것이 아니라,
-    // 이펙트 함수 안에서 이벤트 구독, 취소가 이뤄지므로 이 안에 있는 것이 적절하다.
     const handleMove = throttle((e: PointerEvent) => {
-      setMouse({ x: +e.clientX.toFixed(0), y: +e.clientY.toFixed(0) });
-    }, 20);
+      const x = Number(e.clientX.toFixed(0));
+      const y = Number(e.clientY.toFixed(0));
+      setMouse({ x, y });
+    }, throttleTime);
 
-    console.log('이벤트 구독');
     globalThis.addEventListener('pointermove', handleMove);
 
     return () => {
-      console.log('이벤트 구독 해지');
       globalThis.removeEventListener('pointermove', handleMove);
     };
-  }, []);
+  }, [throttleTime]);
 
   return (
-    <section className="*:text-slate-800 flex flex-col space-y-10">
-      <h2 className="text-2xl font-medium mb-2">React.useEffect 훅 함수</h2>
-      <button
-        type="button"
-        className="px-2 py-1 border text-xl"
-        onClick={handleChangeCount}
+    <section className="flex flex-col items-start">
+      <h2 className="text-2xl font-medium">마우스 포인터 움직임 조절</h2>
+
+      <div className="mt-5 mb-1">
+        <label htmlFor={throttleTimeId}>이벤트 발생 빈도 조절</label>
+        <div className={tm('flex gap-1')}>
+          <input
+            type="range"
+            className="accent-black"
+            id={throttleTimeId}
+            min={10}
+            max={1000}
+            // value={throttleTime}
+            defaultValue={throttleTime}
+            onChange={handleChangeThrottleTime}
+          />
+          <output>{throttleTime / 1000}s</output>
+        </div>
+      </div>
+
+      <output
+        className={tm(
+          'inline-flex justify-center',
+          'my-5 py-3 px-7 rounded-full',
+          'bg-black text-white text-2xl'
+        )}
       >
-        {count}
-      </button>
-      <output className="inline-flex my-5 py-3 px-5 border-6 text-2xl">
-        x = {mouse.x} / y = {mouse.y}
+        x <span className="font-thin mx-3">=</span> {mouse.x}{' '}
+        <span className="font-thin mx-3">/</span> y{' '}
+        <span className="font-thin mx-3">=</span> {mouse.y}
       </output>
     </section>
   );
