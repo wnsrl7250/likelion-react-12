@@ -7,11 +7,26 @@ import { type ColorMoodItem } from './types';
 function SearchListPage() {
   const [list, setList] = useState<ColorMoodItem[]>(colorMoodList);
 
-  const handleUpdateList = (item: ColorMoodItem, isFavorited: boolean) => {
-    const nextList = list.map((it) => {
-      return it.id === item.id ? { ...it, isFavorited } : it;
+  // list = [{ id, title, description, tags, isFavorited }, { id, title, description, tags, isFavorited }]
+
+  const handleUpdateList = (item: ColorMoodItem, nextIsFavorited: boolean) => {
+    // item = { id, title, description, tags, isFavorited }
+    // isFavorited = 다음 번 렌더링에서 화면에 표시될 즐겨찾기 상태 값
+
+    console.log('before\n', list);
+
+    // 다음 렌더링에서 list 상태 스냅샷
+    const nextList = list.map((it /* listItem */) => {
+      // 원본 아이템 id === 사용자 클릭한 아이템
+      // id가 같지 않을 경우, 원본 아이템 반환
+      // id가 같을 경우, 객체 합성({ ...원본아이템, isFavorited: nextIsFavorited })
+      return it.id === item.id ? { ...it, isFavorited: nextIsFavorited } : it;
     });
 
+    console.log('before\n', nextList);
+
+    // React에 다음 렌더링에서 list 상태 스냅샷 전달하면
+    // 다시 렌더링 될 때, list 상태 값으로 nextList가 사용 됨
     setList(nextList);
   };
 
