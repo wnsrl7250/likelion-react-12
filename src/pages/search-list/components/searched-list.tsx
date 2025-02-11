@@ -1,3 +1,4 @@
+import { tm } from '@/utils/tw-merge';
 import { type ColorMoodItem } from '../types';
 import Card from './card';
 
@@ -8,12 +9,10 @@ interface SearchedListProps {
 function SearchedList({ list }: SearchedListProps) {
   return (
     <section>
-      <h3>검색 리스트</h3>
-      <ul>
+      <h3 className="sr-only">검색된 리스트</h3>
+      <ul className={tm('flex flex-col gap-4')}>
         {list.map((item) => (
-          <li key={item.id}>
-            <Card item={item} />
-          </li>
+          <Card key={item.id} item={item} />
         ))}
       </ul>
     </section>
