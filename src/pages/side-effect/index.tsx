@@ -1,3 +1,4 @@
+import throttle from '@/utils/throttle';
 import { useEffect, useState } from 'react';
 
 function SideEffectDemo() {
@@ -29,6 +30,13 @@ function SideEffectDemo() {
   // mouseOverTheCenterOfTheScreen 파생된 상태가 변경될 때마다 이펙트 함수 실행
   useEffect(() => {
     console.log({ mouseOverTheCenterOfTheScreen });
+
+    // 명령형 프로그래밍
+    // if (mouseOverTheCenterOfTheScreen) {
+    //   document.body.classList.add('bg-white', 'text-react');
+    // } else {
+    //   document.body.classList.remove('bg-white', 'text-react');
+    // }
   }, [mouseOverTheCenterOfTheScreen]);
 
   // 마운트 시, 1회 이벤트 구독/취소 설정
@@ -36,9 +44,9 @@ function SideEffectDemo() {
     // [이벤트 핸들러]
     // JSX에서 해당 이벤트 핸들러를 사용하는 것이 아니라,
     // 이펙트 함수 안에서 이벤트 구독, 취소가 이뤄지므로 이 안에 있는 것이 적절하다.
-    const handleMove = (e: PointerEvent) => {
+    const handleMove = throttle((e: PointerEvent) => {
       setMouse({ x: +e.clientX.toFixed(0), y: +e.clientY.toFixed(0) });
-    };
+    }, 20);
 
     console.log('이벤트 구독');
     globalThis.addEventListener('pointermove', handleMove);
