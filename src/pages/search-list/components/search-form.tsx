@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import { tm } from '@/utils/tw-merge';
-import { setQueryParam } from '../utils/query-param';
+import { deleteQueryParam, setQueryParam } from '../utils/query-param';
 
 interface SearchFormProps {
   query: string;
@@ -9,13 +9,18 @@ interface SearchFormProps {
 
 function SearchForm({ query, setQuery }: SearchFormProps) {
   const searchInputId = useId();
+  const nextQuery = query.trim();
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.currentTarget.value);
   };
 
   const handleSearch = () => {
-    setQueryParam(query);
+    if (nextQuery.length > 0) {
+      setQueryParam(nextQuery);
+    } else {
+      deleteQueryParam();
+    }
   };
 
   return (
