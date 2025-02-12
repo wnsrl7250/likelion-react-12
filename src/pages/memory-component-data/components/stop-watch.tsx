@@ -22,6 +22,31 @@ const FPS = 1000 / 60;
 // 호출 시점의 현재 시간 값 반환 함수
 const getTime = () => Date.now();
 
+// 타임 포멧팅 함수
+// recordTime + nowTime - startTime
+const formatTime = (time: number) => {
+  // 밀리초(milliseconds)
+  const milliseconds = parseInt(`${time % 100}`, 10);
+  // 초(seconds) = 1000ms
+  const seconds = parseInt(`${(time / 1000) % 60}`, 10);
+  // 분(minutes) = 60ss
+  const minutes = parseInt(`${(time / (1000 * 60)) % 60}`, 10);
+  // 시(hours) = 60mm
+  const hours = parseInt(`${(time / (1000 * 60 * 60)) % 60}`, 10);
+
+  // 포멧팅
+  // (반환 값: "hh:mm:ss:ms")
+  const [hh, mm, ss, ms] = [hours, minutes, seconds, milliseconds].map(
+    (time) => {
+      return time.toLocaleString('ko-KR', {
+        minimumIntegerDigits: 2,
+      });
+    }
+  );
+
+  return `${hh}:${mm}:${ss}:${ms}`;
+};
+
 // 컴포넌트 --------------------------------------------------------
 function StopWatch() {
   // [상태]
@@ -73,10 +98,18 @@ function StopWatch() {
     resetTime();
   };
 
+  // [파생된 상태]
+  // 타임 포멧팅
+  // "hh:mm:ss:ms"
+  const time = formatTime(recordTime + nowTime - startTime);
+
   return (
     <article aria-label="스톱워치" className="flex flex-col gap-2">
-      <time className="px-4 py-2 bg-black text-white text-lg text-center w-46">
-        {recordTime + nowTime - startTime}
+      <time
+        dateTime={time}
+        className="px-4 py-2 bg-black text-white text-lg text-center w-46 font-mono"
+      >
+        {time}
       </time>
       <div className="flex gap-1">
         <button
