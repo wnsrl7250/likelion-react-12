@@ -25,13 +25,13 @@ function SearchForm({ query, setQuery }: SearchFormProps) {
     .map((word) => word.toLowerCase().trim());
   const isEnabledSearch = words.length > 0;
 
-  // [파생된 상태]
   const checkPeace = words.includes('평화');
   const checkRedColor = words.includes('빨간색');
   const checkConcentration = words.includes('집중력');
 
-  const handleCheck = (tag: string, isChecked: boolean) => {
-    const newWords = isChecked
+  // [이벤트 핸들러]
+  const handleCheck = (tag: string, nextIsChecked: boolean) => {
+    const newWords = nextIsChecked
       ? [...words, tag]
       : words.filter((word) => word !== tag);
     const nextQuery = convertQueryString(newWords);
