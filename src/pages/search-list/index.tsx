@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { tm } from '@/utils/tw-merge';
-import { getQueryParam } from './utils/query-param';
+import { deleteQueryParam, getQueryParam } from './utils/query-param';
 import SearchedList from './components/searched-list';
 import SearchForm from './components/search-form';
 import colorMoodList from './data/color-mood-list';
@@ -17,26 +17,18 @@ function SearchListPage() {
     );
   };
 
-  // 지연된 초기화(lazy initializer)
-  // useState() 훅에 설정된 함수
   const [query, setQuery] = useState(getQueryState);
 
-  // 이펙트 처리
   useEffect(() => {
-    // popstate 이벤트 구독/해지
-    // 이벤트 핸들러 (동일 참조)
     const handlePopState = () => {
-      // 브라우저 popstate 이벤트가 감지될 때
-      // 리액트 앱의 query 상태 업데이트 -> UI 화면 업데이트
       setQuery(getQueryState);
     };
 
-    // 이벤트 구독
     globalThis.addEventListener('popstate', handlePopState);
 
-    // 이벤트 해지
     return () => {
       globalThis.removeEventListener('popstate', handlePopState);
+      deleteQueryParam();
     };
   }, []);
 
