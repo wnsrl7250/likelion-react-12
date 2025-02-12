@@ -3,6 +3,7 @@ import StateManagement from '@/pages/state-management';
 import ErrorBoundaryDemo from '@/pages/error-boundary';
 import SideEffectDemo from '@/pages/side-effect';
 import SearchListPage from '@/pages/search-list';
+import AccessDOMPage from '@/pages/access-dom';
 import LifecycleDemo from '@/pages/lifecycle';
 import TicTacToe from '@/pages/tic-tac-toe';
 import SignInForm from '@/pages/sign-in';
@@ -13,6 +14,11 @@ import NotFound from '@/pages/not-found';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'accessing-dom',
+    text: 'DOM 접근/조작',
+    element: <AccessDOMPage />,
+  },
   {
     path: 'memory-component-data',
     text: '데이터 메모리',
