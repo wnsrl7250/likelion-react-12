@@ -28,7 +28,6 @@ function SearchListPage() {
 
     return () => {
       globalThis.removeEventListener('popstate', handlePopState);
-      deleteQueryParam();
     };
   }, []);
 
