@@ -1,3 +1,4 @@
+import MemoryComponentDataPage from '@/pages/memory-component-data';
 import StateManagement from '@/pages/state-management';
 import ErrorBoundaryDemo from '@/pages/error-boundary';
 import SideEffectDemo from '@/pages/side-effect';
@@ -12,6 +13,11 @@ import NotFound from '@/pages/not-found';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'memory-component-data',
+    text: '데이터 메모리',
+    element: <MemoryComponentDataPage />,
+  },
   { path: 'search-list', text: '검색 리스트', element: <SearchListPage /> },
   { path: 'side-effect', text: '이펙트 처리', element: <SideEffectDemo /> },
   {
