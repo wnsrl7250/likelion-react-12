@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { tm } from '@/utils/tw-merge';
 import { deleteQueryParam, setQueryParam } from '../utils/query-param';
 
@@ -51,6 +51,20 @@ function SearchForm({ query, setQuery }: SearchFormProps) {
     }
   };
 
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const clearId = setTimeout(() => {
+      if (searchRef.current) {
+        searchRef.current.focus();
+      }
+    }, 900);
+
+    return () => {
+      clearTimeout(clearId);
+    };
+  });
+
   return (
     <>
       <output className="bg-react text-white px-4 py-2 rounded-full text-xs font-mono">
@@ -63,6 +77,7 @@ function SearchForm({ query, setQuery }: SearchFormProps) {
         </label>
         <div className={tm('flex gap-1')}>
           <input
+            ref={searchRef}
             type="search"
             name="query"
             id={searchInputId}
