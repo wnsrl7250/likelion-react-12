@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
 import { tm } from '@/utils/tw-merge';
+import { useEffect, useRef, useState } from 'react';
+import { PauseSolid, PlaySolid, StopSolid } from '@mynaui/icons-react';
 
 /*
   // reset time
@@ -155,6 +156,8 @@ function StopWatch() {
         <button
           type="button"
           onClick={handleStartOrPause}
+          aria-label={isStart ? '일시정지' : '시작'}
+          title={isStart ? '일시정지' : '시작'}
           className={tm(
             'cursor-pointer opacity-75',
             'grid place-content-center',
@@ -162,11 +165,14 @@ function StopWatch() {
             'hover:opacity-100'
           )}
         >
-          {isStart ? '일시정지' : '시작'}
+          {/* {isStart ? '일시정지' : '시작'} */}
+          {isStart ? <PauseSolid /> : <PlaySolid />}
         </button>
         <button
           type="button"
           onClick={handleStop}
+          aria-label="정지"
+          title="정지"
           className={tm(
             'cursor-pointer opacity-90',
             'grid place-content-center',
@@ -174,7 +180,8 @@ function StopWatch() {
             'hover:opacity-100'
           )}
         >
-          정지
+          {/* 정지 */}
+          <StopSolid />
         </button>
       </div>
     </article>
