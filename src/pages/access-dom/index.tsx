@@ -15,63 +15,37 @@ function AccessDOMPage() {
   // - 이펙트 함수
   // - ref 콜백 함수
 
-  // JSX -> React API (JavaScript) 코드 컴파일 -> 브라우저 해석(parsing) -> UI 렌더링 (브라우저 페인팅) => 사용자
-  return createElement(
-    'section',
-    {
-      ref: (element) => {
-        console.log('section', { element });
-      },
-    },
-    createElement(
-      'h2',
-      {
-        ref: (element) => {
-          console.log('section > h2', { element });
-        },
-        className: 'text-2xl text-react font-medium',
-      },
-      createElement(
-        'abbr',
-        {
-          ref: (element) => {
-            console.log('section > h2 > abbr', { element });
-          },
-          title: 'Document Object Model',
-          className: 'cursor-help no-underline',
-        },
-        isParse ? 'Document Object Model' : 'DOM'
-      ),
-      ' ',
-      '접근/조작'
-    ),
-    createElement(
-      'button',
-      {
-        type: 'button',
-        className: 'cursor-pointer px-2 py-0.5 bg-black text-white',
-        onClick: () => {
+  // 마크업(markup) 생성
+  return (
+    <section
+      ref={(element) => {
+        if (element) {
+          element.style.cssText = `
+            padding: 40px;
+            border: 4px solid black;
+          `;
+        }
+      }}
+    >
+      <h2 className="text-2xl text-react font-medium">
+        <abbr
+          title="Document Object Model"
+          className="cursor-help no-underline"
+        >
+          {isParse ? 'Document Object Model' : 'DOM'}
+        </abbr>{' '}
+        접근/조작
+      </h2>
+      <button
+        type="button"
+        onClick={() => {
           setIsParse((p) => !p);
-        },
-      },
-      'toggle button'
-    )
+        }}
+      >
+        DOM 용어 풀이
+      </button>
+    </section>
   );
 }
 
 export default AccessDOMPage;
-
-// 마크업(markup) 생성
-// return (
-//   <section>
-//     <h2 className="text-2xl text-react font-medium">
-//       <abbr
-//         title="Document Object Model"
-//         className="cursor-help no-underline"
-//       >
-//         DOM
-//       </abbr>{' '}
-//       접근/조작
-//     </h2>
-//   </section>
-// )
