@@ -1,54 +1,35 @@
-import { animate } from 'motion';
+import { animate, stagger } from 'motion';
 import { tm } from '@/utils/tw-merge';
 import { useEffect, useRef } from 'react';
 
 function StaggerList() {
-  const itemMapRef = useRef<null | Map<number, HTMLLIElement>>(null);
-
-  const getItemMap = () => {
-    // 최초 렌더링 시, Map 객체 생성
-    if (itemMapRef.current === null) {
-      itemMapRef.current = new Map();
-    }
-
-    // 이후 렌더링 시에는 기억된 Map 객체 반환
-    return itemMapRef.current;
-  };
+  const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const itemMap = getItemMap();
-    const items = Array.from(itemMap.values());
+    const listElement = listRef.current;
 
-    // 스태거(stagger) 애니메이션
-    items.forEach((item, index) => {
-      // keyframes 애니메이션
-      animate(item, { y: [100, 0], opacity: [0, 1] }, { delay: 0.2 * index });
-    });
+    if (listElement) {
+      const listItems = listElement.querySelectorAll('li');
+
+      animate(
+        listItems,
+        {
+          y: [100, -50, 25, 5, 0],
+          opacity: [0, 1],
+        },
+
+        { delay: stagger(0.2) }
+      );
+    }
   }, []);
 
   return (
-    <ul className="flex gap-2.5">
+    <ul ref={listRef} className="flex gap-2.5">
       {Array(6)
         .fill(null)
         .map((_, index) => {
           return (
             <li
-              ref={
-                /* ref 콜백 함수 */
-                (element) => {
-                  // Map 객체에 <li> DOM 요소 수집
-                  const itemMap = getItemMap();
-
-                  if (element) {
-                    itemMap.set(index, element);
-                  }
-
-                  // 클린업(정리)
-                  return () => {
-                    itemMap.delete(index);
-                  };
-                }
-              }
               key={index}
               className={tm(
                 'flex justify-center items-center size-16 rounded-lg',

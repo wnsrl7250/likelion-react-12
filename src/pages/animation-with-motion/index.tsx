@@ -44,11 +44,11 @@ function AnimationWithMotionPage() {
         Replay
       </button>
 
-      <StaggerList />
+      <StaggerList key={replayKey} />
 
       {/* key 속성이 변경되면, 리액트 컴포넌트 초기화 */}
       {/* 초기화: 애니메이션을 다시 진행 */}
-      <AnimationBox key={replayKey}>
+      <AnimationBox>
         <Box size={48} />
       </AnimationBox>
     </section>
