@@ -3,8 +3,20 @@ import AnimationBox from './components/animation-box';
 import ReplayAnimation from './components/replay-animation';
 import StaggerList from './components/stagger-list';
 import MotionComponent from './components/declarative-animation';
+import { useEffect, useRef } from 'react';
 
 function AnimationWithMotionPage() {
+  // 하위 컴포넌트 DOM 요소 참조를 위한 참조(ref) 객체
+  const childDomRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const childDomButtonElement = childDomRef.current;
+    if (childDomButtonElement) {
+      childDomButtonElement.focus();
+      childDomButtonElement.style.background = 'red';
+    }
+  });
+
   return (
     <section className="flex flex-col items-start gap-7">
       <h2 className="text-2xl font-medium">
@@ -12,7 +24,9 @@ function AnimationWithMotionPage() {
       </h2>
 
       <ReplayAnimation>
-        <MotionComponent />
+        <AnimationBox ref={childDomRef}>
+          <Box size={48} />
+        </AnimationBox>
       </ReplayAnimation>
 
       <ReplayAnimation>
@@ -20,9 +34,7 @@ function AnimationWithMotionPage() {
       </ReplayAnimation>
 
       <ReplayAnimation>
-        <AnimationBox>
-          <Box size={48} />
-        </AnimationBox>
+        <MotionComponent />
       </ReplayAnimation>
     </section>
   );
