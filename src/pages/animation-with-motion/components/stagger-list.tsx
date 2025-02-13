@@ -25,7 +25,7 @@ function StaggerList() {
 
   return (
     <ul ref={listRef} className="flex gap-2.5">
-      {Array(6)
+      {Array(3)
         .fill(null)
         .map((_, index) => {
           return (
