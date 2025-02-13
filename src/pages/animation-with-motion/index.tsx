@@ -2,6 +2,7 @@ import { Box } from '@mynaui/icons-react';
 import AnimationBox from './components/animation-box';
 import ReplayAnimation from './components/replay-animation';
 import StaggerList from './components/stagger-list';
+import MotionComponent from './components/declarative-animation';
 
 function AnimationWithMotionPage() {
   return (
@@ -11,13 +12,17 @@ function AnimationWithMotionPage() {
       </h2>
 
       <ReplayAnimation>
-        <AnimationBox>
-          <Box size={48} />
-        </AnimationBox>
+        <MotionComponent />
       </ReplayAnimation>
 
       <ReplayAnimation>
         <StaggerList />
+      </ReplayAnimation>
+
+      <ReplayAnimation>
+        <AnimationBox>
+          <Box size={48} />
+        </AnimationBox>
       </ReplayAnimation>
     </section>
   );
