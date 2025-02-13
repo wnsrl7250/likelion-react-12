@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 
 type AnimationControlProps = React.ComponentProps<'input'> & {
   label: string;
@@ -7,30 +7,18 @@ type AnimationControlProps = React.ComponentProps<'input'> & {
 
 function AnimationControl({
   label,
-  onUpdate,
+  children,
   ...inputProps
 }: AnimationControlProps) {
   const id = useId();
 
-  const [value, setValue] = useState(inputProps.value ?? 0);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    setValue(value);
-    onUpdate?.(value);
-  };
-
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <input
-        id={id}
-        type="range"
-        value={value}
-        onChange={handleChange}
-        {...inputProps}
-      />
-      <output>{value}</output>
+    <div className="grid grid-cols-[60px_1fr_30px]">
+      <label htmlFor={id} className="font-medium">
+        {label}
+      </label>
+      <input id={id} type="range" {...inputProps} />
+      <output className="place-self-end">{children}</output>
     </div>
   );
 }
