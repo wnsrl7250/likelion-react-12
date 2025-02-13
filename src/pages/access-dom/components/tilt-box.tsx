@@ -1,3 +1,4 @@
+import { tm } from '@/utils/tw-merge';
 import React, { useEffect, useRef } from 'react';
 import VanillaTilt, { type TiltOptions } from 'vanilla-tilt';
 
@@ -18,13 +19,19 @@ function TiltBox(props: React.ComponentProps<'div'>) {
   return (
     <div
       ref={boxRef}
-      className="size-40 bg-zinc-900 text-zinc-50 text-5xl font-thin grid place-items-center hover:z-50"
+      className={tm(
+        'grid place-items-center size-40',
+        'bg-zinc-900 text-zinc-50 text-5xl font-thin',
+        'hover:z-50'
+      )}
       {...props}
     />
   );
 }
 
 export default TiltBox;
+
+// --------------------------------------------------------------------------
 
 const VANILLA_TILT_OPTIONS: TiltOptions = {
   // 기울이는 방향을 반대로 변경
