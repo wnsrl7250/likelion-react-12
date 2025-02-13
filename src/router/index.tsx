@@ -9,11 +9,17 @@ import TicTacToe from '@/pages/tic-tac-toe';
 import SignInForm from '@/pages/sign-in';
 import SignUpForm from '@/pages/sign-up';
 import NotFound from '@/pages/not-found';
+import AnimationWithMotionPage from '@/pages/animation-with-motion';
 
 // --------------------------------------------------------------------------
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'animation',
+    text: '애니메이션',
+    element: <AnimationWithMotionPage />,
+  },
   {
     path: 'accessing-dom',
     text: 'DOM 접근/조작',
