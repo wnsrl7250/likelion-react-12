@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import SearchInput from './components/search-input';
 import TiltBox from './components/tilt-box';
 
@@ -6,6 +6,14 @@ function AccessDOMPage() {
   const [isParse, setIsParse] = useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useLayoutEffect(() => {
+    console.log('layout effect');
+  });
+
+  useEffect(() => {
+    console.log('effect');
+  });
 
   useEffect(() => {
     const searchInput = searchInputRef.current;
