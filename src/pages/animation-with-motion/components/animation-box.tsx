@@ -19,7 +19,9 @@ function AnimationBox({
         {
           // x: 240 /* 24px 만큼 이동 */,
           rotate: -360 /* -360deg 만큼 회전 */,
-          scale: 0.8,
+          scale: 0.55,
+          x: -28,
+          y: -32,
         },
         // 애니메이션 옵션
         {
@@ -38,7 +40,7 @@ function AnimationBox({
         'flex justify-center items-center',
         'size-30',
         'bg-react text-white text-lg font-medium',
-        'rounded-lg',
+        'rounded-xl',
         className
       )}
       {...restProps}

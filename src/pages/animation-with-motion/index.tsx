@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { tm } from '@/utils/tw-merge';
 import { Box, Redo } from '@mynaui/icons-react';
 import AnimationBox from './components/animation-box';
+import StaggerList from './components/stagger-list';
 
 function AnimationWithMotionPage() {
   // 화면 업데이트를 위한 상태 선언
@@ -13,6 +14,13 @@ function AnimationWithMotionPage() {
   // }, [replayKey]);
 
   const handleReplay = () => {
+    // const nextReplayKey = replayKey + 1; // 0, 1, 2, 3, ...
+    // setReplayKey(nextReplayKey);
+    // setReplayKey((replayKey) => {
+    //   return replayKey + 1;
+    // });
+
+    // 리플레이 할 수도 있도록 키 증가
     setReplayKey((r) => r + 1);
   };
 
@@ -36,8 +44,12 @@ function AnimationWithMotionPage() {
         Replay
       </button>
 
+      <StaggerList />
+
+      {/* key 속성이 변경되면, 리액트 컴포넌트 초기화 */}
+      {/* 초기화: 애니메이션을 다시 진행 */}
       <AnimationBox key={replayKey}>
-        <Box size={32} />
+        <Box size={48} />
       </AnimationBox>
     </section>
   );
