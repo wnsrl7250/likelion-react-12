@@ -18,6 +18,8 @@ interface SearchFormProps {
 // --------------------------------------------------------------------------
 
 function SearchForm({ query, ref, setQuery }: SearchFormProps) {
+  console.log('render: search form');
+
   const [queryString, setQueryString] = useState(getQueryString);
   const searchInputId = useId();
 
@@ -57,6 +59,7 @@ function SearchForm({ query, ref, setQuery }: SearchFormProps) {
   // [명령형 기능(핸들러) 공유 방식 채택]
   // useImperativeHandle() 훅 함수
   useImperativeHandle(ref, () => {
+    console.log('use imperative handle: share handles');
     const inputElement = inputRef.current;
 
     // 기능 1. inputRef 참조를 통해 <input> 요소에 초점 이동하기
@@ -88,7 +91,7 @@ function SearchForm({ query, ref, setQuery }: SearchFormProps) {
       select,
       remove,
     };
-  });
+  }, []);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
