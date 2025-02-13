@@ -17,8 +17,9 @@ function AnimationBox({
         boxElement,
         // 애니메이션 속성 (CSS 속성, JavaScript 객체 또는 배열 데이터, SVG, ...)
         {
-          x: 240 /* 24px 만큼 이동 */,
+          // x: 240 /* 24px 만큼 이동 */,
           rotate: -360 /* -360deg 만큼 회전 */,
+          scale: 0.8,
         },
         // 애니메이션 옵션
         {
