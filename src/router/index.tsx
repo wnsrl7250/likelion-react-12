@@ -7,6 +7,7 @@ import SideEffectDemo from '@/pages/side-effect';
 import SearchListPage from '@/pages/search-list';
 import AccessDOMPage from '@/pages/access-dom';
 import LifecycleDemo from '@/pages/lifecycle';
+import MemoListPage from '@/pages/memo-list';
 import TicTacToe from '@/pages/tic-tac-toe';
 import SignInForm from '@/pages/sign-in';
 import SignUpForm from '@/pages/sign-up';
@@ -16,6 +17,11 @@ import NotFound from '@/pages/not-found';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'supabase-memo-list',
+    text: '메모 리스트',
+    element: <MemoListPage />,
+  },
   {
     path: 'data-fetching',
     text: '데이터 쿼리/뮤테이션',
