@@ -1,9 +1,6 @@
 import type { Recipes, Recipe } from '../types';
 
 const ENDPOINT = 'https://dummyjson.com/recipes';
-// GET https://dummyjson.com/recipes/search?q=Margherita
-// GET https://dummyjson.com/recipes?limit=5&skip=8&select=name,image,rating
-// GET https://dummyjson.com/recipes?sortBy=name&order=asc
 
 interface Options {
   q?: string;

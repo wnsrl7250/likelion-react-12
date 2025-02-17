@@ -1,9 +1,11 @@
 // POST 'https://dummyjson.com/recipes/add'
 
+import delay from '@/utils/delay';
+import { Spinner } from '@mynaui/icons-react';
 import { useEffect, useState } from 'react';
-import type { Recipe, Recipes } from '../types';
 import { getRecipes } from '../lib/recipes';
-import { PlusSolid, Spinner } from '@mynaui/icons-react';
+import type { Recipe, Recipes } from '../types';
+import SubmitButton from './SubmitButton';
 
 function RecipeCreate() {
   const [data, setData] = useState<null | Recipes>(null);
@@ -25,6 +27,8 @@ function RecipeCreate() {
   // 레시피 추가 요청
   const handleAdd = async (formData: FormData) => {
     try {
+      await delay();
+
       const response = await fetch('https://dummyjson.com/recipes/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,13 +67,7 @@ function RecipeCreate() {
           aria-label="레시피"
           placeholder="레시피 이름 입력"
         />
-        <button
-          type="submit"
-          className="p-1 bg-react text-white my-1 cursor-pointer"
-          aria-label="추가"
-        >
-          <PlusSolid size={24} />
-        </button>
+        <SubmitButton />
       </form>
 
       {!data && (
