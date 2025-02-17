@@ -13,7 +13,7 @@ function RecipeList() {
   const limitId = useId();
 
   const [startIndex, setStartIndex] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(1);
 
   useEffect(() => {
     let ignore = false;

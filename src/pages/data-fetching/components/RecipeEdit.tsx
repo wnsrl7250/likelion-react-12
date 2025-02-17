@@ -4,14 +4,19 @@ import { Edit, Spinner } from '@mynaui/icons-react';
 import { editRecipe, getRecipes } from '../lib/recipes';
 import type { Recipe, Recipes } from '../types';
 import SubmitButton from './SubmitButton';
+import { tm } from '@/utils/tw-merge';
 
 function RecipeEdit() {
   const [data, setData] = useState<null | Recipes>(null);
 
+  const startIndex = 3;
+  const limit = 5;
+  const randomIndex = Math.floor(Math.random() * limit);
+
   useEffect(() => {
     let ignore = false;
 
-    getRecipes({ startIndex: 5, limit: 3 }).then((data) => {
+    getRecipes({ startIndex, limit }).then((data) => {
       if (!ignore) {
         setData(data);
       }
@@ -33,7 +38,7 @@ function RecipeEdit() {
 
     // 현재 화면에 표시된 레시피 아이템 중 하나
     if (data?.recipes) {
-      willEditRecipe = data.recipes.at(0);
+      willEditRecipe = data.recipes.at(randomIndex);
     }
 
     // 서버에 데이터 추가 요청
@@ -45,14 +50,16 @@ function RecipeEdit() {
     console.log(editedRecipe);
 
     // 서버의 응답을 받아서, 클라이언트 앱 화면 업데이트 요청
-    // if (data) {
-    //   const nextData: Recipes = {
-    //     ...data,
-    //     recipes: [newRecipe, ...data.recipes],
-    //   };
+    if (data) {
+      const nextData: Recipes = {
+        ...data,
+        recipes: data.recipes.map((recipe) => {
+          return recipe.id === editedRecipe.id ? editedRecipe : recipe;
+        }),
+      };
 
-    //   setData(nextData);
-    // }
+      setData(nextData);
+    }
   };
 
   return (
@@ -78,10 +85,15 @@ function RecipeEdit() {
       )}
 
       <ul className="flex flex-col gap-2 my-2">
-        {data?.recipes?.map((item: Recipe) => (
+        {data?.recipes?.map((item: Recipe, index: number) => (
           <li
             key={item.id}
-            className="p-2 border-1 border-slate-400 rounded hover:bg-zinc-200/50"
+            className={tm(
+              'p-2 border-1 border-slate-400 rounded hover:bg-zinc-200/50',
+              {
+                'border-blue-600 text-blue-700': index === randomIndex,
+              }
+            )}
           >
             {item.name}
           </li>
