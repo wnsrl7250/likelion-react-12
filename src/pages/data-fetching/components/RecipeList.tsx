@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Recipes } from '../types';
 import { getRecipes } from '../lib/recipes';
 
@@ -7,12 +7,18 @@ function RecipeList() {
   const [error, setError] = useState<null | Error>(null);
   const [data, setData] = useState<null | Recipes>(null);
 
+  const startIndexId = useId();
+  const limitId = useId();
+
+  const [startIndex, setStartIndex] = useState(0);
+  const [limit, setLimit] = useState(10);
+
   useEffect(() => {
     let ignore = false;
 
     setLoading(true);
 
-    getRecipes()
+    getRecipes({ startIndex, limit, fields: 'name,rating' })
       .then((data) => {
         if (!ignore) {
           setData(data);
@@ -30,10 +36,39 @@ function RecipeList() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [startIndex, limit]);
 
   return (
     <>
+      <div>
+        <div>
+          <label htmlFor={startIndexId}>요청 시작 인덱스</label>
+          <input
+            type="range"
+            name="startIndex"
+            id={startIndexId}
+            min={0}
+            max={50}
+            value={startIndex}
+            onChange={(e) => setStartIndex(Number(e.currentTarget.value))}
+          />
+          <output>{startIndex}</output>
+        </div>
+        <div>
+          <label htmlFor={limitId}>요청 갯수</label>
+          <input
+            type="range"
+            name="limit"
+            id={limitId}
+            min={1}
+            max={50}
+            value={limit}
+            onChange={(e) => setLimit(Number(e.currentTarget.value))}
+          />
+          <output>{limit}</output>
+        </div>
+      </div>
+
       <div className="flex flex-col gap-1">
         <h3 className="text-xl font-medium">Loading</h3>
         <p>로딩 상태(loading)</p>
