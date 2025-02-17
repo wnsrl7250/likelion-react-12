@@ -1,7 +1,5 @@
-// POST 'https://dummyjson.com/recipes/add'
-
 import delay from '@/utils/delay';
-import { Spinner } from '@mynaui/icons-react';
+import { PlusSolid, Spinner } from '@mynaui/icons-react';
 import { useEffect, useState } from 'react';
 import { addRecipe, getRecipes } from '../lib/recipes';
 import type { Recipe, Recipes } from '../types';
@@ -58,7 +56,9 @@ function RecipeCreate() {
           aria-label="레시피"
           placeholder="레시피 이름 입력"
         />
-        <SubmitButton />
+        <SubmitButton label="추가">
+          <PlusSolid size={24} />
+        </SubmitButton>
       </form>
 
       {!data && (

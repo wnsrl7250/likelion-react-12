@@ -82,4 +82,20 @@ export const getRecipeById = async (id: string | number) => {
 
 // UPDATE -------------------------------------------------------
 
+export const editRecipe = async (editRecipe: Partial<Recipe>) => {
+  const { id, ...recipe } = editRecipe;
+
+  const response = await fetch(`${ENDPOINT}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(recipe),
+  });
+
+  if (!response.ok) {
+    throw new Error('레시피 수정에 실패했습니다. 🥲');
+  }
+
+  return (await response.json()) as Recipe;
+};
+
 // DELETE -------------------------------------------------------
