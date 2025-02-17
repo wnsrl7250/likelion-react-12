@@ -1,6 +1,8 @@
 import { useEffect, useId, useState } from 'react';
 import { Recipes } from '../types';
 import { getRecipes } from '../lib/recipes';
+import { Spinner } from '@mynaui/icons-react';
+import delay from '@/utils/delay';
 
 function RecipeList() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,8 +21,9 @@ function RecipeList() {
     setLoading(true);
 
     getRecipes({ startIndex, limit, fields: 'name,rating' })
-      .then((data) => {
+      .then(async (data) => {
         if (!ignore) {
+          await delay(Math.random() * 1000);
           setData(data);
         }
       })
@@ -41,7 +44,7 @@ function RecipeList() {
   return (
     <>
       <div>
-        <div>
+        <div className="flex items-center gap-2">
           <label htmlFor={startIndexId}>요청 시작 인덱스</label>
           <input
             type="range"
@@ -54,7 +57,7 @@ function RecipeList() {
           />
           <output>{startIndex}</output>
         </div>
-        <div>
+        <div className="flex items-center gap-2">
           <label htmlFor={limitId}>요청 갯수</label>
           <input
             type="range"
@@ -70,14 +73,17 @@ function RecipeList() {
       </div>
 
       <div className="flex flex-col gap-1">
-        <h3 className="text-xl font-medium">Loading</h3>
+        <div role="alert">
+          {loading && <Spinner size={32} className="animate-spin opacity-50" />}
+        </div>
+        {/* <h3 className="text-xl font-medium">Loading</h3>
         <p>로딩 상태(loading)</p>
         <pre className="rounded p-6 overflow-auto bg-react text-[#22d045] text-sm">
           {loading.toString()}
-        </pre>
+        </pre> */}
       </div>
 
-      <details className="flex flex-col gap-1">
+      <details open={!loading} className="flex flex-col gap-1">
         <summary className="text-xl font-medium">Data</summary>
         <p>성취(fulfilled)</p>
         <pre className="rounded p-6 overflow-auto bg-react text-[#27a0cc] text-sm">
