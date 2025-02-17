@@ -3,7 +3,7 @@
 import delay from '@/utils/delay';
 import { Spinner } from '@mynaui/icons-react';
 import { useEffect, useState } from 'react';
-import { getRecipes } from '../lib/recipes';
+import { addRecipe, getRecipes } from '../lib/recipes';
 import type { Recipe, Recipes } from '../types';
 import SubmitButton from './SubmitButton';
 
@@ -26,33 +26,24 @@ function RecipeCreate() {
 
   // 레시피 추가 요청
   const handleAdd = async (formData: FormData) => {
-    try {
-      await delay();
+    await delay();
 
-      const response = await fetch('https://dummyjson.com/recipes/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.get('recipe'),
-        }),
-      });
+    // <form> 내부 데이터 가져오기
+    const newRecipeName = formData.get('recipe') as string;
 
-      if (!response.ok) {
-        throw new Error('레시피 추가에 실패했습니다. 😭');
-      }
+    // 서버에 데이터 추가 요청
+    const newRecipe = await addRecipe({
+      name: newRecipeName,
+    });
 
-      const addedRecipe = await response.json();
+    // 서버의 응답을 받아서, 클라이언트 앱 화면 업데이트 요청
+    if (data) {
+      const nextData: Recipes = {
+        ...data,
+        recipes: [newRecipe, ...data.recipes],
+      };
 
-      if (data) {
-        const nextData: Recipes = {
-          ...data,
-          recipes: [addedRecipe, ...data.recipes],
-        };
-
-        setData(nextData);
-      }
-    } catch (error) {
-      console.error((error as Error).message);
+      setData(nextData);
     }
   };
 

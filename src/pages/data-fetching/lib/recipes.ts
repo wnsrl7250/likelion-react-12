@@ -2,14 +2,36 @@ import type { Recipes, Recipe } from '../types';
 
 const ENDPOINT = 'https://dummyjson.com/recipes';
 
-interface Options {
+interface QueryOptions {
+  // 검색
   q?: string;
+  // 필터링
+  fields?: string;
+  // 페이지네이션
   limit?: number;
   startIndex?: number;
-  fields?: string;
-  sortBy?: string;
+  // 정렬
+  sortBy?: keyof Recipe;
   order?: 'asc' | 'desc';
 }
+
+// CREATE -------------------------------------------------------
+
+export const addRecipe = async (newRecipe: Partial<Recipe>) => {
+  const response = await fetch(`${ENDPOINT}/add`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newRecipe),
+  });
+
+  if (!response.ok) {
+    throw new Error('레시피 추가에 실패했습니다. 😭');
+  }
+
+  return (await response.json()) as Recipe;
+};
+
+// READ ---------------------------------------------------------
 
 export const getRecipes = async ({
   q = '',
@@ -18,7 +40,7 @@ export const getRecipes = async ({
   fields = '',
   sortBy = 'id',
   order = 'asc',
-}: Options = {}) => {
+}: QueryOptions = {}) => {
   let requestQuery = `${ENDPOINT}/`;
 
   if (q.trim().length > 0) {
@@ -57,3 +79,7 @@ export const getRecipeById = async (id: string | number) => {
     response.json()
   )) as Recipe;
 };
+
+// UPDATE -------------------------------------------------------
+
+// DELETE -------------------------------------------------------
