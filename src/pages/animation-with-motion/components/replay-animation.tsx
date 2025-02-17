@@ -26,6 +26,7 @@ function ReplayAnimation({
           'cursor-pointer',
           'flex items-center gap-1.5 px-3.5 py-2 rounded-lg',
           'bg-react text-white text-sm font-semibold uppercase',
+          'hover:*:rotate-360 hover:*:duration-500 hover:*:transition-all',
           'active:scale-95'
         )}
       >

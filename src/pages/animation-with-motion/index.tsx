@@ -3,7 +3,7 @@ import { Box } from '@mynaui/icons-react';
 import StaggerList from './components/stagger-list';
 import AnimationBox from './components/animation-box';
 import ReplayAnimation from './components/replay-animation';
-import MotionComponent from './components/declarative-animation';
+import MotionComponent from './components/motion-component';
 
 function AnimationWithMotionPage() {
   // 하위 컴포넌트 DOM 요소 참조를 위한 참조(ref) 객체
@@ -11,9 +11,9 @@ function AnimationWithMotionPage() {
 
   useEffect(() => {
     const childDomButtonElement = childDomRef.current;
+
     if (childDomButtonElement) {
       childDomButtonElement.focus();
-      // childDomButtonElement.style.background = 'red';
     }
   });
 
@@ -24,9 +24,7 @@ function AnimationWithMotionPage() {
       </h2>
 
       <ReplayAnimation>
-        <AnimationBox ref={childDomRef}>
-          <Box size={48} />
-        </AnimationBox>
+        <MotionComponent />
       </ReplayAnimation>
 
       <ReplayAnimation>
@@ -34,7 +32,9 @@ function AnimationWithMotionPage() {
       </ReplayAnimation>
 
       <ReplayAnimation>
-        <MotionComponent />
+        <AnimationBox ref={childDomRef}>
+          <Box size={48} />
+        </AnimationBox>
       </ReplayAnimation>
     </section>
   );

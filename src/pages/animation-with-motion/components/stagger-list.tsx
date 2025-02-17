@@ -15,7 +15,7 @@ function StaggerList() {
         listItems,
         {
           y: [100, -50, 25, 5, 0],
-          opacity: [0, 1],
+          opacity: [0, 0.5, 1, 0.5, 1],
         },
 
         { delay: stagger(0.2) }
@@ -25,7 +25,7 @@ function StaggerList() {
 
   return (
     <ul ref={listRef} className="flex gap-2.5">
-      {Array(3)
+      {Array(6)
         .fill(null)
         .map((_, index) => {
           return (

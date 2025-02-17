@@ -22,14 +22,14 @@ export const navList = [
     element: <DataFetchingPage />,
   },
   {
+    path: 'animation',
+    text: '모션 애니메이션',
+    element: <AnimationWithMotionPage />,
+  },
+  {
     path: 'accessing-dom',
     text: 'DOM 접근/조작',
     element: <AccessDOMPage />,
-  },
-  {
-    path: 'animation',
-    text: '애니메이션',
-    element: <AnimationWithMotionPage />,
   },
   {
     path: 'memory-component-data',

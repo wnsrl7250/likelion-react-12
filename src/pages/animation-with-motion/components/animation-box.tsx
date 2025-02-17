@@ -28,12 +28,13 @@ function AnimationBox({
           scale: 0.55,
           x: -28,
           y: -32,
+          // opacity: [0, 1],
         },
         // 애니메이션 옵션
         {
           type: 'spring',
-          // repeat: 2,
-          // repeatDelay: 0.2,
+          // repeat: 1,
+          // repeatDelay: 0.5,
         }
       );
     }
