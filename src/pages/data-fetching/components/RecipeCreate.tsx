@@ -54,7 +54,7 @@ function RecipeCreate() {
           name="recipe"
           className="bg-white py-1 px-2 placeholder:text-sm"
           aria-label="레시피"
-          placeholder="레시피 이름 입력"
+          placeholder="추가할 레시피 이름"
         />
         <SubmitButton label="추가">
           <PlusSolid size={24} />

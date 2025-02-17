@@ -99,3 +99,15 @@ export const editRecipe = async (editRecipe: Partial<Recipe>) => {
 };
 
 // DELETE -------------------------------------------------------
+
+export const deleteRecipe = async (deleteRecipeId: number) => {
+  const response = await fetch(`${ENDPOINT}/${deleteRecipeId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('레시피 삭제에 실패했습니다. 🥲');
+  }
+
+  return (await response.json()) as Recipe;
+};

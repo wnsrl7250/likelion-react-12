@@ -27,7 +27,7 @@ function RecipeEdit() {
     };
   }, []);
 
-  // 레시피 추가 요청
+  // 레시피 수정 요청
   const handleEdit = async (formData: FormData) => {
     await delay();
 
@@ -71,7 +71,7 @@ function RecipeEdit() {
           name="recipe"
           className="bg-white py-1 px-2 placeholder:text-sm"
           aria-label="레시피"
-          placeholder="레시피 이름 입력"
+          placeholder="수정할 레시피 이름"
         />
         <SubmitButton label="수정">
           <Edit size={24} />
