@@ -10,72 +10,62 @@ interface State {
 const ENDPOINT = 'https://dummyjson.com/recipes/9';
 
 function DataFetchingPage() {
-  // 화면 업데이트를 위해 필요한 상태 선언
-  // - loading: boolean / status: 'idle' | 'pending' | 'loading' | 'fulfilled' | 'rejected'
-  // - error: null | Error
-  // - data: null | T
-
   const [state, setState] = useState<State>({
     loading: false,
     error: null,
     data: null,
   });
 
-  // 이펙트 (외부 시스템과 동기화)
-  // - API : 서버(server) 데이터베이스에서 데이터 가져오기 (비동기)
-  // - 데이터 가져오기 이후, 상태 업데이트 요청 -> 화면 업데이트 (동기화)
-  useEffect(
-    () => {
-      // 데이터 쿼리(data query)
-      // Fetch API 사용
+  useEffect(() => {
+    // let ignore = false;
 
-      // 이펙트 함수 내부에 상태 업데이트 제외 설정을 위한
-      // 지역 변수 선언
-      let ignore = false;
+    // AbortController 인스턴스 생성
+    const controller = new AbortController();
 
-      // 로딩 상태로 전환
-      setState((s) => ({ ...s, loading: true }));
+    setState((s) => ({ ...s, loading: true }));
 
-      const fetchData = async () => {
-        try {
-          await delay(2000);
-          const response = await fetch(ENDPOINT);
-          const jsonData = await response.json();
+    const fetchData = async () => {
+      try {
+        await delay(500);
+        // AbortController 인스턴스의 시그널을 fetch() 함수에 옵션으로 설정
+        const response = await fetch(ENDPOINT, { signal: controller.signal });
+        const jsonData = await response.json();
 
-          // ignore 값이 false일 때만 상태 업데이트
-          if (!ignore) {
-            console.log('fulfilled:: update state');
-            setState({
-              loading: false,
-              data: jsonData,
-              error: null,
-            });
-          }
-        } catch (error) {
-          // ignore 값이 false일 때만 상태 업데이트
-          if (!ignore) {
-            console.log('rejected:: update state');
-            setState({
-              loading: false,
-              data: null,
-              error: error as Error,
-            });
-          }
+        // if (!ignore) {
+        console.log('fulfilled:: update state');
+        setState({
+          loading: false,
+          data: jsonData,
+          error: null,
+        });
+        // }
+      } catch (error) {
+        // 요청 중단한 경우, 오류가 아니므로 함수 중단
+        if ((error as Error).name.includes('AbortError')) {
+          return;
         }
-      };
 
-      fetchData();
+        // if (!ignore) {
+        console.log('rejected:: update state');
+        setState({
+          loading: false,
+          data: null,
+          error: error as Error,
+        });
+        // }
+      }
+    };
 
-      // 클린업(정리) 함수
-      return () => {
-        // 지역 변수 변경
-        ignore = true;
-      };
-    },
-    // 서버에 데이터 요청하는 것은 최초 1회
-    // 종속성 배열을 비워두면 마운트 이후 1회 실행
-    []
-  );
+    fetchData();
+
+    return () => {
+      // ignore = true;
+
+      // 리액트의 스트릭트 모드에 의해 2회 이펙트 함수가 실행됨에 따라
+      // 불필요해진 이전 요청 AbortController 중단(취소)
+      controller.abort();
+    };
+  }, []);
 
   const { error } = state;
 
