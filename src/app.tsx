@@ -3,7 +3,7 @@ import Playground from './playground';
 
 function App() {
   return (
-    <ErrorBoundary fallback={<p>Oops... 오류 발생! 😥</p>}>
+    <ErrorBoundary fallback={<p>이런... App에서 오류가 발생했습니다! 😥</p>}>
       <Playground />
     </ErrorBoundary>
   );
