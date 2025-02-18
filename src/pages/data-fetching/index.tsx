@@ -8,15 +8,16 @@ import useQuery from '@/hooks/use-query';
 import type { Pokemon } from '@/types/pokemon';
 import Loading from '../memo-list/components/loading';
 
+const fetchPokemon = (type: string) =>
+  fetch(`https://pokeapi.co/api/v2/pokemon/${type}`);
+
 function DataFetchingPage() {
   useDocumentTitle('데이터 페칭');
 
-  const { data, isLoading, $$cache } = useQuery<Pokemon>({
+  const { data, isLoading } = useQuery<Pokemon>({
     queryKey: '@pokemon/pikachu',
-    queryFn: () => fetch('https://pokeapi.co/api/v2/pokemon/pikachu'),
+    queryFn: () => fetchPokemon('pikachu'),
   });
-
-  console.table($$cache);
 
   return (
     <section className="flex flex-col gap-5 my-5">
