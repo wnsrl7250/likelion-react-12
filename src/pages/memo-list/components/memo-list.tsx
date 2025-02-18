@@ -1,4 +1,7 @@
-import type { MemoItem } from '../types';
+import type { MemoItem } from '../lib/supabase-client';
+import CreateForm from './create-form';
+import SearchForm from './search-form';
+import SearchedList from './searched-list';
 
 interface MemoListProps {
   items: MemoItem[];
@@ -6,10 +9,11 @@ interface MemoListProps {
 
 function MemoList({ items }: MemoListProps) {
   return (
-    <article>
-      <h2>메모 리스트</h2>
-      <pre>{JSON.stringify(items, null, 2)}</pre>
-    </article>
+    <div>
+      <CreateForm />
+      <SearchForm />
+      <SearchedList />
+    </div>
   );
 }
 
