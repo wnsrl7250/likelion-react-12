@@ -14,6 +14,8 @@
   --color-mint-200: #e6f7ff;
   --color-react: #010d11;
   /* #440ae6 | #0b7ea4 | #010d11 */
+
+  --breakpoint-xs: 20rem;
 }
 
 @utility wrapper {
