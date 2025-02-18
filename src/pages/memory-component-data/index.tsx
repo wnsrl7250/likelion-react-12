@@ -1,7 +1,10 @@
+import useDocumentTitle from '@/hooks/use-document-title';
 import CounterFunction from './components/counter.function';
 import StopWatch from './components/stop-watch';
 
 function MemoryComponentDataPage() {
+  useDocumentTitle('useRef 훅 활용');
+
   return (
     <section>
       <h2 className="text-2xl text-slate-800 font-medium mb-4">

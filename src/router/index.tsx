@@ -2,6 +2,7 @@ import MemoryComponentDataPage from '@/pages/memory-component-data';
 import AnimationWithMotionPage from '@/pages/animation-with-motion';
 import StateManagement from '@/pages/state-management';
 import ErrorBoundaryDemo from '@/pages/error-boundary';
+import CustomHookPage from '@/pages/custom-hook';
 import DataFetchingPage from '@/pages/data-fetching';
 import SideEffectDemo from '@/pages/side-effect';
 import SearchListPage from '@/pages/search-list';
@@ -17,6 +18,11 @@ import NotFound from '@/pages/not-found';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'react-custom-hook',
+    text: '로직 재사용',
+    element: <CustomHookPage />,
+  },
   {
     path: 'supabase-memo-list',
     text: '메모 리스트 (with Supabase)',
