@@ -89,7 +89,7 @@ function MemoItem({ item }: MemoItemProps) {
         ref={contentRef}
         contentEditable={isEditing}
         suppressContentEditableWarning
-        className="text-sm text-slate-400 leading-relaxed"
+        className="flex-1 text-sm text-slate-400 leading-relaxed"
       >
         {item.content}
       </p>
