@@ -75,7 +75,7 @@ function AccessDOMPage() {
             <TiltBox key={index} className="overflow-hidden">
               <img
                 className="object-cover scale-280 hover:scale-200 transition-all ease-in-out duration-700"
-                src={`/furnitures/furniture-${index + 1}.png`}
+                src={`/furnitures/furniture-${index + 1}.jpg`}
                 alt=""
               />
               {/* {index + 1} */}
