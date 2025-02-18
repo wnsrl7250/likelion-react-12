@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { PostgrestError } from '@supabase/supabase-js';
+import type { MemoItem } from './lib/supabase-client';
 import MemoList from './components/memo-list';
-import { getMemoList } from './lib/memo-list';
-import type { MemoItem } from './types';
+import { getMemoList } from './lib/api';
 
 function MemoListPage() {
   const [loading, setLoading] = useState<boolean>(true);
