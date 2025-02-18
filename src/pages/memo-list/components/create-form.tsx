@@ -6,21 +6,17 @@ import { useId } from 'react';
 
 function CreateForm() {
   const handleAddMemo = async (formData: FormData) => {
-    console.log(Object.fromEntries(formData));
+    const id = Math.floor(Math.random() * 1000);
+    const title = (formData.get('title') as string).trim();
+    const content = (formData.get('content') as string).trim();
 
-    return;
+    const newMemoItem = {
+      id,
+      title,
+      content,
+    } as MemoItemInsert;
 
-    const newMemoItem = {} as MemoItemInsert;
-
-    const { error, data } = await addMemoItem(newMemoItem);
-    if (error) {
-      throw error;
-    }
-
-    if (data) {
-      // 화면 업데이트
-      console.log(data);
-    }
+    await addMemoItem(newMemoItem);
   };
 
   const titleId = useId();

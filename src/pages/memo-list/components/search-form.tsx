@@ -36,7 +36,11 @@ function SearchForm({ setSearch }: SearchFormProps) {
           type="search"
           name="search"
           id={searchId}
-          className={tm('bg-react text-sky-400', 'px-2.5 py-1 rounded-sm')}
+          placeholder="제목 또는 내용 검색"
+          className={tm(
+            'bg-react text-sky-400 placeholder:text-sky-600',
+            'px-2.5 py-1 rounded-sm'
+          )}
         />
         <div role="group" className={tm('flex')}>
           <button
