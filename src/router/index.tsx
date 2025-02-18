@@ -1,4 +1,4 @@
-import MemoryComponentDataPage from '@/pages/memory-component-data';
+import MemoryComponentDataPage from '@/pages/memory-component-data/page';
 import AnimationWithMotionPage from '@/pages/animation-with-motion';
 import StateManagement from '@/pages/state-management';
 import ErrorBoundaryDemo from '@/pages/error-boundary';
