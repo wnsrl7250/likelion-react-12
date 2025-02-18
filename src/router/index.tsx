@@ -19,7 +19,7 @@ import NotFound from '@/pages/not-found';
 export const navList = [
   {
     path: 'supabase-memo-list',
-    text: '메모 리스트',
+    text: '메모 리스트 (with Supabase)',
     element: <MemoListPage />,
   },
   {
