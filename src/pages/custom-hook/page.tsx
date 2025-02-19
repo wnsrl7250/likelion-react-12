@@ -1,10 +1,10 @@
 import Title from '@/components/title';
+import { useFetchData } from '@/hooks/use-fetch-data';
+import useToggle from '@/hooks/use-toggle';
 import Loading from '../memo-list/components/loading';
 import PokemonWithUseFetchData from './components/pokemon-with-use-fetch-data';
-import { useFetchData } from '@/hooks/use-fetch-data';
-import type { PokemonList } from './types';
 import PokemonWithUseQuery from './components/pokemon-with-use-query';
-import useToggle from '@/hooks/use-toggle';
+import type { PokemonList } from './types';
 
 function CustomHookPage() {
   // 포켓몬 집합 정보 가져오기

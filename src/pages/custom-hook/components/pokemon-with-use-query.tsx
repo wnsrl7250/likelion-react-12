@@ -2,6 +2,7 @@ import { tm } from '@/utils/tw-merge';
 import Loading from '@/pages/memo-list/components/loading';
 import type { Pokemon } from '../types';
 import useQuery from '@/hooks/use-query';
+import useInView from '@/hooks/use-in-view';
 
 const pikachuQueryOptions = {
   queryKey: '@pokemon/pikachu',
@@ -20,9 +21,14 @@ function PokemonWithUseQuery() {
   const pihachu = useQuery<Pokemon>(pikachuQueryOptions);
   const raichu = useQuery<Pokemon>(raichuQueryOptions);
 
+  const [figureRef, isInView] = useInView<HTMLImageElement>({ once: true });
+
+  console.log({ isInView });
+
   return (
     <>
       <figure
+        ref={figureRef}
         className={tm(
           'flex gap-5 justify-center items-center',
           'border-4 border-black/10',
