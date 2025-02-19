@@ -13,10 +13,14 @@ function Pokemon({ id }: PokemonProps) {
     <PokemonLayout>
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-        alt={pokemon.name}
+        alt=""
         title={pokemon.name}
+        loading="lazy"
         className="size-28"
       />
+      <figcaption className="text-sm text-stone-700 uppercase -translate-y-1">
+        {pokemon.name}
+      </figcaption>
     </PokemonLayout>
   );
 }
