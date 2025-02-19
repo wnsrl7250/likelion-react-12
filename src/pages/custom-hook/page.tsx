@@ -1,28 +1,40 @@
-import { tm } from '@/utils/tw-merge';
-import useDocumentTitle from '@/hooks/use-document-title';
+import Title from '@/components/title';
 import Loading from '../memo-list/components/loading';
+import Pokemon from './components/pokemon';
 
 function CustomHookPage() {
-  useDocumentTitle('커스텀 훅');
+  // 포켓몬 집합 정보 가져오기
+  // 'https://pokeapi.co/api/v2/pokemon?offset=3&limit=10'
+
+  const loading = true;
+  const error = null;
+  const data = null;
 
   return (
-    <section className="flex flex-col gap-2">
-      <h2 className="font-medium text-2xl mb-6">
-        사용자 정의 훅 함수(Custom Hook) 활용
-      </h2>
+    <>
+      <Title>커스텀 훅</Title>
+      <section className="flex flex-col gap-2">
+        <h2 className="font-medium text-2xl mb-6">
+          사용자 정의 훅 함수(Custom Hook) 활용
+        </h2>
 
-      <figure
-        className={tm(
-          'flex gap-5 justify-center',
-          'border-4 border-black/10',
-          'rounded-full p-6',
-          'hover:border-black',
-          'transition-colors duration-250 ease-in-out'
+        <h3 className="text-xl font-medium">
+          페이지에서 데이터 요청/응답 후, 화면 업데이트
+        </h3>
+        {loading && (
+          <Loading size={48} label="포켓몬 리스트 데이터 로딩 중..." />
         )}
-      >
-        <Loading size={48} className="text-black/50" />
-      </figure>
-    </section>
+        {error && <div role="alert">{(error as Error).message}</div>}
+        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+
+        <hr className="my-10" />
+
+        <h3 className="text-xl font-medium mb-6">
+          컴포넌트에서 데이터 요청/응답 후, 화면 업데이트
+        </h3>
+        <Pokemon />
+      </section>
+    </>
   );
 }
 

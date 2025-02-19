@@ -4,11 +4,8 @@ import type { MemoItem } from './lib/supabase-client';
 import MemoList from './components/memo-list';
 import Loading from './components/loading';
 import { getMemoList, subscribe } from './lib/api';
-import useDocumentTitle from '@/hooks/use-document-title';
 
 function MemoListPage() {
-  useDocumentTitle('메모리스트 with Supabase');
-
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<null | MemoItem[]>(null);
   const [error, setError] = useState<null | PostgrestError>(null);
@@ -76,12 +73,15 @@ function MemoListPage() {
   }, []);
 
   return (
-    <section>
-      <h1 className="sr-only">메모 리스트 (with Supabase)</h1>
-      {loading && <Loading />}
-      {error && <div role="alert">{error.message}</div>}
-      {data && <MemoList items={data} />}
-    </section>
+    <>
+      <title>메모리스트 with Supabase | 리액트 플레이그라운드</title>
+      <section>
+        <h1 className="sr-only">메모 리스트 (with Supabase)</h1>
+        {loading && <Loading />}
+        {error && <div role="alert">{error.message}</div>}
+        {data && <MemoList items={data} />}
+      </section>
+    </>
   );
 }
 
