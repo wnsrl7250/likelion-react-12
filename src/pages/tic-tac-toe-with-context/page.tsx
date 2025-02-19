@@ -10,53 +10,39 @@ import {
   type Cells,
 } from './constants';
 import Title from '@/components/title';
+import {
+  TicTacToeContext,
+  type TicTacToeContextValue,
+} from './contexts/tic-tac-toe';
 
-function TicTacToe() {
-  // [상태]
+function TicTacToeWithContext() {
   const { data: gameHistory, setData: setGameHistory } = usePersist<Cells[]>(
     '@tic-tac-toe/game-history',
-    [INITIAL_CELLS],
-    { changeOnSave: true }
+    [INITIAL_CELLS]
   );
 
-  // [상태]
   const { data: gameOrder, setData: setGameOrder } = usePersist(
     '@tic-tac-toe/game-order',
-    0,
-    { changeOnSave: true }
+    0
   );
 
-  // [파생된 상태]
-  // 현재 게임 보드판
   const currentCells = gameHistory![gameOrder!];
 
-  // [파생된 상태]
-  // 다음 플레이어
   const nextPlayer = getNextPlayer(gameOrder!);
 
-  // [파생된 상태]
-  // 게임 승자 정보
   const winner = getWinner(currentCells);
 
-  // [파생된 상태]
-  // 게임 상태 메시지
   const statusMessage = getStatusMessage(nextPlayer, winner, currentCells);
 
-  // [이벤트 핸들러]
-  // 게임 진행 함수
   const handlePlayGame = (index: number) => {
-    // 승리자가 있다면 게임 오버(GAME OVER)
     if (winner) {
-      // 알림(notification)
       alert(`GAME OVER!\nWinner ${winner.player}`);
       return;
     }
 
-    // 게임 상태 업데이트 (순서)
     const nextGameOrder = gameOrder! + 1;
     setGameOrder(nextGameOrder);
 
-    // 게임 상태 업데이트 (게임 보드 셀)
     const nextCells = currentCells.map((cell, i) =>
       index !== i ? cell : nextPlayer
     );
@@ -69,40 +55,46 @@ function TicTacToe() {
     setGameHistory(nextGameHistory);
   };
 
-  // [이벤트 핸들러]
-  // 게임 초기화 함수
   const handleReGame = () => {
-    // 게임 운영에 사용되는 상태 초기화 (리셋, 리-게임)
     setGameHistory([INITIAL_CELLS]);
     setGameOrder(0);
   };
 
-  // [이벤트 핸들러]
-  // 타임 트레버(시간 여행)
   const handleTimeTravel = (travelIndex: number) => {
     setGameOrder(travelIndex);
   };
+
+  // 틱택토 게임 컨텍스트 값
+  const value = {
+    gameHistory,
+    setGameHistory,
+    currentCells,
+    gameOrder,
+    setGameOrder,
+    nextPlayer,
+    winner,
+    statusMessage,
+    playGame: handlePlayGame,
+    restartGame: handleReGame,
+    jumpGame: handleTimeTravel,
+  } satisfies TicTacToeContextValue;
 
   return (
     <>
       <Title>틱택토 게임 (with 시간여행 기능)</Title>
       <article className={tm('flex space-x-5 justify-center', 'mt-10')}>
         <h2 className="sr-only">틱택토 게임</h2>
-        <Board
-          cells={currentCells}
-          winner={winner}
-          statusMessage={statusMessage}
-          onPlayGame={handlePlayGame}
-          onReGame={handleReGame}
-        />
-        <History
-          count={gameHistory!.length}
-          gameOrder={gameOrder!}
-          onTimeTravel={handleTimeTravel}
-        />
+        <TicTacToeContext.Provider value={value}>
+          <Board />
+          <History
+            count={gameHistory!.length}
+            gameOrder={gameOrder!}
+            onTimeTravel={handleTimeTravel}
+          />
+        </TicTacToeContext.Provider>
       </article>
     </>
   );
 }
 
-export default TicTacToe;
+export default TicTacToeWithContext;
