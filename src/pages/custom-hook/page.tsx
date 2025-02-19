@@ -1,6 +1,5 @@
 import Title from '@/components/title';
 import { useFetchData } from '@/hooks/use-fetch-data';
-import useToggle from '@/hooks/use-toggle';
 import Loading from '../memo-list/components/loading';
 import PokemonWithUseFetchData from './components/pokemon-with-use-fetch-data';
 import PokemonWithUseQuery from './components/pokemon-with-use-query';
@@ -14,11 +13,6 @@ function CustomHookPage() {
     'https://pokeapi.co/api/v2/pokemon?offset=3&limit=28'
   );
 
-  const [toggleState, toggle] = useToggle(true, {
-    // persist: true,
-    key: '@toggle/',
-  });
-
   return (
     <>
       <Title>커스텀 훅</Title>
@@ -26,10 +20,6 @@ function CustomHookPage() {
         <h2 className="font-medium text-2xl mb-6">
           사용자 정의 훅 함수(Custom Hook) 활용
         </h2>
-
-        <button type="button" onClick={toggle}>
-          {toggleState?.toString()}
-        </button>
 
         <h3 className="text-xl font-medium">
           페이지에서 데이터 요청/응답 후, 화면 업데이트
