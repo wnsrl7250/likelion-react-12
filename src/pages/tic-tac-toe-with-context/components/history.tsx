@@ -1,13 +1,11 @@
 import { tm } from '@/utils/tw-merge';
 import HistoryItem from './history-item';
+import { useContext } from 'react';
+import { TicTacToeContext } from '../contexts/tic-tac-toe';
 
-interface HistoryProps {
-  count: number;
-  gameOrder: number;
-  onTimeTravel?: (travelIndex: number) => void;
-}
-
-function History({ count, gameOrder, onTimeTravel }: HistoryProps) {
+function History() {
+  const { gameHistory, gameOrder, jumpGame } = useContext(TicTacToeContext);
+  const count = gameHistory?.length;
   const historyCount = Array(count).fill(null);
 
   return (
@@ -27,7 +25,7 @@ function History({ count, gameOrder, onTimeTravel }: HistoryProps) {
                   'cursor-not-allowed bg-black/50': isCurrentIndex,
                 })}
                 onClick={() => {
-                  onTimeTravel?.(index);
+                  jumpGame?.(index);
                 }}
               >
                 {index === 0 ? '게임 시작!' : content}

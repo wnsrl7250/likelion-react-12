@@ -1,14 +1,11 @@
 import { tm } from '@/utils/tw-merge';
+import { useContext } from 'react';
+import { TicTacToeContext } from '../contexts/tic-tac-toe';
 import Cell from './cell';
-import type { Winner, Cells } from '../constants';
 
-interface GridProps {
-  cells: Cells;
-  winner: Winner;
-  onPlay?: (cellIndex: number) => void;
-}
+function Grid() {
+  const { currentCells: cells, winner } = useContext(TicTacToeContext);
 
-function Grid({ cells, winner, onPlay }: GridProps) {
   const handleKeyControl = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const buttons = Array.from(e.currentTarget.querySelectorAll('button'));
     const activeButtonIndex = buttons.findIndex(
@@ -77,11 +74,7 @@ function Grid({ cells, winner, onPlay }: GridProps) {
         }
 
         return (
-          <Cell
-            key={index}
-            className={winnerClasses}
-            onPlay={() => onPlay?.(index)}
-          >
+          <Cell key={index} index={index} className={winnerClasses}>
             {cell}
           </Cell>
         );

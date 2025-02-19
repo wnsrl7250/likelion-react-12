@@ -1,17 +1,16 @@
 import { tm } from '@/utils/tw-merge';
+import { useContext } from 'react';
+import { TicTacToeContext } from '../contexts/tic-tac-toe';
 
-interface StatusProps {
-  message: string;
-  onReGame?: () => void;
-}
+function Status() {
+  const { statusMessage, restartGame } = useContext(TicTacToeContext);
 
-function Status({ message, onReGame }: StatusProps) {
   // [파생된 상태]
-  const isComplete = !message.includes('넥스트 플레이어');
+  const isComplete = !statusMessage.includes('넥스트 플레이어');
 
   return (
     <div className={tm('flex justify-between w-full px-5')}>
-      <p>{message}</p>
+      <p>{statusMessage}</p>
       {isComplete && (
         <button
           type="button"
@@ -21,7 +20,7 @@ function Status({ message, onReGame }: StatusProps) {
             'text-xs font-semibold',
             'hover:bg-slate-800/10'
           )}
-          onClick={onReGame}
+          onClick={restartGame}
         >
           한 게임 더?!
         </button>

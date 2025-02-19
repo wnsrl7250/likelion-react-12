@@ -86,11 +86,7 @@ function TicTacToeWithContext() {
         <h2 className="sr-only">틱택토 게임</h2>
         <TicTacToeContext.Provider value={value}>
           <Board />
-          <History
-            count={gameHistory!.length}
-            gameOrder={gameOrder!}
-            onTimeTravel={handleTimeTravel}
-          />
+          <History />
         </TicTacToeContext.Provider>
       </article>
     </>
