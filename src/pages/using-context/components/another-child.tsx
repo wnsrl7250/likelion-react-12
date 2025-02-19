@@ -1,4 +1,4 @@
-function GrandChild() {
+function AnotherChild() {
   const message = '안녕!';
 
   const setMessage = (message: string) => {
@@ -21,4 +21,4 @@ function GrandChild() {
   );
 }
 
-export default GrandChild;
+export default AnotherChild;
