@@ -1,6 +1,7 @@
 import MemoryComponentDataPage from '@/pages/memory-component-data/page';
 import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
 import TicTacToeWithContext from '@/pages/tic-tac-toe-with-context/page';
+import AuthHeadingsLevel from '@/pages/auto-headings-level/page';
 import StateManagement from '@/pages/state-management/page';
 import ErrorBoundaryDemo from '@/pages/error-boundary/page';
 import UsingContextPage from '@/pages/using-context/page';
@@ -21,6 +22,11 @@ import NotFound from '@/pages/not-found/page';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'auto-headings-level',
+    text: '제목 레벨 자동 구성 (with 컨텍스트)',
+    element: <AuthHeadingsLevel />,
+  },
   {
     path: 't3-with-context',
     text: '틱택토 게임 (with 컨텍스트)',
