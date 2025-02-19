@@ -1,3 +1,4 @@
+import delay from '@/utils/delay';
 import { useEffect, useState } from 'react';
 
 export function useFetchData<T, E = Error>(url: string) {
@@ -21,6 +22,8 @@ export function useFetchData<T, E = Error>(url: string) {
         const data = (await response.json()) as T;
 
         if (!ignore) {
+          await delay(Math.floor(Math.random() * 1000));
+
           setLoading(false);
           setError(null);
           setData(data);

@@ -8,7 +8,7 @@ function Pokemon() {
   // 'https://pokeapi.co/api/v2/pokemon/1'
 
   const { loading, error, data } = useFetchData<PokemonSingle>(
-    'https://pokeapi.co/api/v2/pokemon/45'
+    'https://pokeapi.co/api/v2/pokemon/25'
   );
 
   return (
@@ -28,6 +28,7 @@ function Pokemon() {
         <img
           src={data.sprites.front_default}
           alt={data.name}
+          title={data.name}
           className="size-40"
         />
       )}

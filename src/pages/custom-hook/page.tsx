@@ -1,8 +1,9 @@
 import Title from '@/components/title';
 import Loading from '../memo-list/components/loading';
-import Pokemon from './components/pokemon';
+import PokemonWithUseFetchData from './components/pokemon-with-use-fetch-data';
 import { useFetchData } from '@/hooks/use-fetch-data';
 import type { PokemonList } from './types';
+import PokemonWithUseQuery from './components/pokemon-with-use-query';
 
 function CustomHookPage() {
   // 포켓몬 집합 정보 가져오기
@@ -35,7 +36,8 @@ function CustomHookPage() {
         <h3 className="text-xl font-medium mb-6">
           컴포넌트에서 데이터 요청/응답 후, 화면 업데이트
         </h3>
-        <Pokemon />
+        <PokemonWithUseFetchData />
+        <PokemonWithUseQuery />
       </section>
     </>
   );
