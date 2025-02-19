@@ -1,14 +1,16 @@
 import Title from '@/components/title';
 import Loading from '../memo-list/components/loading';
 import Pokemon from './components/pokemon';
+import { useFetchData } from '@/hooks/use-fetch-data';
+import type { PokemonList } from './types';
 
 function CustomHookPage() {
   // 포켓몬 집합 정보 가져오기
   // 'https://pokeapi.co/api/v2/pokemon?offset=3&limit=10'
 
-  const loading = true;
-  const error = null;
-  const data = null;
+  const { loading, error, data } = useFetchData<PokemonList>(
+    'https://pokeapi.co/api/v2/pokemon?offset=3&limit=28'
+  );
 
   return (
     <>
@@ -24,8 +26,9 @@ function CustomHookPage() {
         {loading && (
           <Loading size={48} label="포켓몬 리스트 데이터 로딩 중..." />
         )}
-        {error && <div role="alert">{(error as Error).message}</div>}
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+        {error && <div role="alert">{error.message}</div>}
+        {/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
+        {!loading && data && <output>{data.results.length}</output>}
 
         <hr className="my-10" />
 
