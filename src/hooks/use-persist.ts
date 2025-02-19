@@ -1,5 +1,20 @@
-import { getStorage, removeStorage, setStorage } from '@/utils/storage';
 import { useState, useEffect } from 'react';
+
+// 스토리지 데이터 읽기
+const getStorage = <T>(key: string, storage = localStorage) => {
+  const storageData = storage.getItem(key);
+  return storageData ? (JSON.parse(storageData) as T) : undefined;
+};
+
+// 스토리지 데이터 쓰기
+const setStorage = <T>(key: string, value: T, storage = localStorage) => {
+  storage.setItem(key, JSON.stringify(value));
+};
+
+// 스토리지 데이터 제거
+const removeStorage = (key: string, storage = localStorage) => {
+  storage.removeItem(key);
+};
 
 function usePersist<T>(
   key: string,

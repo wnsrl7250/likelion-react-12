@@ -1,5 +1,7 @@
 // 스토리지 데이터 읽기
 export const getStorage = <T>(key: string, storage = localStorage) => {
+  console.log(storage);
+
   const storageData = storage.getItem(key);
   return storageData ? (JSON.parse(storageData) as T) : undefined;
 };
