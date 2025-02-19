@@ -1,12 +1,20 @@
+import { use } from 'react';
+import { fetchPokemon } from '../api/pokemon';
 import PokemonLayout from './pokemon-layout';
 
-function Pokemon() {
+interface PokemonProps {
+  id: number;
+}
+
+function Pokemon({ id }: PokemonProps) {
+  const pokemon = use(fetchPokemon(id));
+
   return (
     <PokemonLayout>
       <img
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-        alt="pikachu"
-        title="pikachu"
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+        alt={pokemon.name}
+        title={pokemon.name}
         className="size-28"
       />
     </PokemonLayout>

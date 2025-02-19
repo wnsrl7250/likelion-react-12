@@ -54,7 +54,7 @@ function SuspenseUsePage() {
           <output className="px-4 font-extralight text-3xl">{pokemonId}</output>
         </div>
         <Suspense fallback={<PokemonSpinner />}>
-          <Pokemon />
+          <Pokemon id={pokemonId} />
         </Suspense>
       </section>
     </>
