@@ -19,20 +19,18 @@ useImperativeHandle
   
 */
 
-import { useEffect, useRef, useState } from 'react';
 import { tm } from '@/utils/tw-merge';
-import { getQueryParam } from './utils/query-param';
-import SearchedList from './components/searched-list';
+import { useEffect, useRef, useState } from 'react';
 import SearchForm from './components/search-form-18-version';
+import SearchedList from './components/searched-list';
 import colorMoodList from './data/color-mood-list';
 import { type ColorMoodItem } from './types';
-import useDocumentTitle from '@/hooks/use-document-title';
+import { getQueryParam } from './utils/query-param';
+import Title from '@/components/title';
 
 const getQueryState = () => getQueryParam() ?? '';
 
 function SearchListPage() {
-  useDocumentTitle('검색 리스트 UI 구현');
-
   console.log('render: search list page');
   const [list, setList] = useState<ColorMoodItem[]>(colorMoodList);
 
@@ -92,15 +90,18 @@ function SearchListPage() {
   });
 
   return (
-    <section className={tm('flex flex-col gap-5 items-center')}>
-      <h2 className="text-2xl font-medium text-react">카드 검색 리스트</h2>
-      <SearchForm
-        ref={sharedImperativeHandlesRef}
-        query={query}
-        setQuery={setQuery}
-      />
-      <SearchedList list={list} query={query} onUpdate={handleUpdateList} />
-    </section>
+    <>
+      <Title>검색 리스트 UI</Title>
+      <section className={tm('flex flex-col gap-5 items-center')}>
+        <h2 className="text-2xl font-medium text-react">카드 검색 리스트</h2>
+        <SearchForm
+          ref={sharedImperativeHandlesRef}
+          query={query}
+          setQuery={setQuery}
+        />
+        <SearchedList list={list} query={query} onUpdate={handleUpdateList} />
+      </section>
+    </>
   );
 }
 

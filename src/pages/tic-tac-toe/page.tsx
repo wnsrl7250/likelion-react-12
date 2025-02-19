@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import usePersist from '@/hooks/use-persist';
 import { tm } from '@/utils/tw-merge';
 import Board from './components/board';
 import History from './components/history';
@@ -9,12 +10,9 @@ import {
   INITIAL_CELLS,
   type Cells,
 } from './constants';
-import useDocumentTitle from '@/hooks/use-document-title';
-import usePersist from '@/hooks/use-persist';
+import Title from '@/components/title';
 
 function TicTacToe() {
-  useDocumentTitle('틱택토 게임 (with 시간여행 기능)');
-
   // [상태]
   // 게임 보드 셀(cells, 9개(3 x 3))
   // const [gameHistory, setGameHistory] = useState<Cells[]>([INITIAL_CELLS]);
@@ -91,21 +89,24 @@ function TicTacToe() {
   };
 
   return (
-    <article className={tm('flex space-x-5 justify-center', 'mt-10')}>
-      <h2 className="sr-only">틱택토 게임</h2>
-      <Board
-        cells={currentCells}
-        winner={winner}
-        statusMessage={statusMessage}
-        onPlayGame={handlePlayGame}
-        onReGame={handleReGame}
-      />
-      <History
-        count={gameHistory!.length}
-        gameOrder={gameOrder!}
-        onTimeTravel={handleTimeTravel}
-      />
-    </article>
+    <>
+      <Title>틱택토 게임 (with 시간여행 기능)</Title>
+      <article className={tm('flex space-x-5 justify-center', 'mt-10')}>
+        <h2 className="sr-only">틱택토 게임</h2>
+        <Board
+          cells={currentCells}
+          winner={winner}
+          statusMessage={statusMessage}
+          onPlayGame={handlePlayGame}
+          onReGame={handleReGame}
+        />
+        <History
+          count={gameHistory!.length}
+          gameOrder={gameOrder!}
+          onTimeTravel={handleTimeTravel}
+        />
+      </article>
+    </>
   );
 }
 

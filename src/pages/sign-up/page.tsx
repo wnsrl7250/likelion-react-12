@@ -1,9 +1,9 @@
+import ActionButton from '@/components/action-button';
+import FormInput from '@/components/form-input';
+import Title from '@/components/title';
+import { isEmail, isPassword } from '@/lib/validator';
 import { useState } from 'react';
 import S from './style.module.css';
-import FormInput from '@/components/form-input';
-import ActionButton from '@/components/action-button';
-import { isEmail, isPassword } from '@/lib/validator';
-import useDocumentTitle from '@/hooks/use-document-title';
 
 interface SignUpFormData {
   username: string;
@@ -20,8 +20,6 @@ interface EventData {
 }
 
 function HomeworkSignUpForm() {
-  useDocumentTitle('사용자 가입 폼');
-
   const [formData, setFormData] = useState<SignUpFormData>({
     username: '',
     useremail: '',
@@ -98,49 +96,52 @@ function HomeworkSignUpForm() {
   };
 
   return (
-    <section>
-      <h3 className="sr-only">회원가입 폼</h3>
-      <form className={S.signUpForm} action={handleSignUp}>
-        <FormInput
-          label="이름"
-          name="username"
-          placeholder="2글자 이상"
-          value={formData.username}
-          onChange={handleChange}
-          hasError={error.username}
-        />
-        <FormInput
-          type="email"
-          label="이메일"
-          name="useremail"
-          placeholder="user@company.io"
-          value={formData.useremail}
-          onChange={handleChange}
-          hasError={error.useremail}
-        />
-        <FormInput
-          type="password"
-          label="패스워드"
-          name="userpassword"
-          placeholder="숫자, 영문 조합 6자리 이상 입력"
-          value={formData.userpassword}
-          onChange={handleChange}
-          hasError={error.userpassword}
-          hasToggleButton
-        />
-        <FormInput
-          type="password"
-          label="패스워드 확인"
-          name="userpasswordConfirm"
-          placeholder="입력한 패스워드 다시 입력"
-          value={formData.userpasswordConfirm}
-          onChange={handleChange}
-          hasError={error.userpasswordConfirm}
-          hasToggleButton
-        />
-        <ActionButton aria-disabled={!isAllInputed}>회원가입</ActionButton>
-      </form>
-    </section>
+    <>
+      <Title>사용자 가입 폼</Title>
+      <section>
+        <h3 className="sr-only">회원가입 폼</h3>
+        <form className={S.signUpForm} action={handleSignUp}>
+          <FormInput
+            label="이름"
+            name="username"
+            placeholder="2글자 이상"
+            value={formData.username}
+            onChange={handleChange}
+            hasError={error.username}
+          />
+          <FormInput
+            type="email"
+            label="이메일"
+            name="useremail"
+            placeholder="user@company.io"
+            value={formData.useremail}
+            onChange={handleChange}
+            hasError={error.useremail}
+          />
+          <FormInput
+            type="password"
+            label="패스워드"
+            name="userpassword"
+            placeholder="숫자, 영문 조합 6자리 이상 입력"
+            value={formData.userpassword}
+            onChange={handleChange}
+            hasError={error.userpassword}
+            hasToggleButton
+          />
+          <FormInput
+            type="password"
+            label="패스워드 확인"
+            name="userpasswordConfirm"
+            placeholder="입력한 패스워드 다시 입력"
+            value={formData.userpasswordConfirm}
+            onChange={handleChange}
+            hasError={error.userpasswordConfirm}
+            hasToggleButton
+          />
+          <ActionButton aria-disabled={!isAllInputed}>회원가입</ActionButton>
+        </form>
+      </section>
+    </>
   );
 }
 

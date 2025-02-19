@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import Title from '@/components/title';
 import type { PostgrestError } from '@supabase/supabase-js';
-import type { MemoItem } from './lib/supabase-client';
-import MemoList from './components/memo-list';
+import { useEffect, useState } from 'react';
 import Loading from './components/loading';
+import MemoList from './components/memo-list';
 import { getMemoList, subscribe } from './lib/api';
+import type { MemoItem } from './lib/supabase-client';
 
 function MemoListPage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -74,7 +75,7 @@ function MemoListPage() {
 
   return (
     <>
-      <title>메모리스트 with Supabase | 리액트 플레이그라운드</title>
+      <Title>메모리스트 with Supabase</Title>
       <section>
         <h1 className="sr-only">메모 리스트 (with Supabase)</h1>
         {loading && <Loading />}

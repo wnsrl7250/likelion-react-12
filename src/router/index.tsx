@@ -2,8 +2,9 @@ import MemoryComponentDataPage from '@/pages/memory-component-data/page';
 import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
 import StateManagement from '@/pages/state-management/page';
 import ErrorBoundaryDemo from '@/pages/error-boundary/page';
-import CustomHookPage from '@/pages/custom-hook/page';
 import DataFetchingPage from '@/pages/data-fetching/page';
+import SuspenseUsePage from '@/pages/suspense-use/page';
+import CustomHookPage from '@/pages/custom-hook/page';
 import SideEffectDemo from '@/pages/side-effect/page';
 import SearchListPage from '@/pages/search-list/page';
 import AccessDOMPage from '@/pages/access-dom/page';
@@ -18,6 +19,11 @@ import NotFound from '@/pages/not-found/page';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'streaming',
+    text: '스트리밍',
+    element: <SuspenseUsePage />,
+  },
   {
     path: 'react-custom-hook',
     text: '로직 재사용',
