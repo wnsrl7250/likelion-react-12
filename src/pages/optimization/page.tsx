@@ -5,11 +5,38 @@ import Section from '@/components/section';
 import Title from '@/components/title';
 import Counter from './components/counter';
 import Message from './components/message';
+import ColorContextSetter from './components/color-context-setter';
 
 export const ColorContext = createContext('');
 
 function OptimizationPage() {
-  const [color] = useState('#000');
+  // 상태
+  const [color, setColor] = useState('#000');
+
+  // 상태 업데이트 로직을 포함하는 이벤트 핸들러
+  // 하위 컴포넌트에 전달하는 함수는 매번 렌더링될 때마다 새로운 함수가 된다.... (리-렌더링 주 원인)
+  // 하위 컴포넌트 메모 했음에도 왜??? 다시 렌더링되는 것일까? (속성(prop)이 변했기 때문)
+
+  // 이벤트 핸들러(함수) 참조를 하위 컴포넌트에 전달해야 하는 상황
+  // 이벤트 핸들러(함수) 참조를 기억해야 한다.
+  // useMemo 또는 useCallback
+  // 기억하려는 값의 유형은? 함수!!
+  // useMemo? useCallback?
+
+  // 원본 함수 (렌더링 될 때마다 새로워짐)
+  // const handleColor = (nextColor: string) => setColor(nextColor);
+
+  // useMemo 버전 (함수 값 기억)
+  // const handleColorMemo = useMemo(() => 함수값, []);
+  // const handleColorMemo = useMemo(() => (nextColor: string) => setColor(nextColor), []);
+
+  // useCallback 버전 (함수 값 기억)
+  // const handleColorCb = useCallback(함수값, []);
+  // const handleColorCb = useCallback((nextColor: string) => setColor(nextColor), []);
+  // const handleColor = useCallback(
+  //   (nextColor: string) => setColor(nextColor),
+  //   []
+  // );
 
   const [stars, setStars] = useState('⭐️');
   const handleAddStar = () => setStars((s) => s + '⭐️');
@@ -21,14 +48,21 @@ function OptimizationPage() {
     []
   );
 
+  const handler = () => {
+    setColor('#000');
+  };
+
   return (
     <>
       <Title>리액트 앱 성능 최적화</Title>
 
+      <button type="button" onClick={handler}>
+        change color
+      </button>
+
       <Section level={2}>
         <Heading className="text-2xl font-medium">성능 최적화</Heading>
         <hr className="my-8" />
-
         <div className="flex gap-5">
           <button type="button" onClick={handleAddStar}>
             ⭐️ 추가
@@ -37,8 +71,9 @@ function OptimizationPage() {
           <output>{stars}</output>
         </div>
 
-        <hr className="my-8" />
         <ColorContext value={color}>
+          <ColorContextSetter setColor={setColor} />
+          <hr className="my-8" />
           <Counter messageElement={messageElement} />
         </ColorContext>
       </Section>
