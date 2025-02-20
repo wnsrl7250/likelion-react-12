@@ -1,11 +1,7 @@
 import { useContext } from 'react';
 import HeadingsLevelContext from '@/contexts/level';
 
-type SectioningContent = Omit<
-  React.ComponentProps<'section'>,
-  keyof React.ComponentProps<'article'>
-> &
-  React.ComponentProps<'article'>;
+type SectioningContent = React.ComponentProps<'section'>;
 
 type SectionProps = SectioningContent & {
   tag?: 'section' | 'article';
@@ -22,9 +18,9 @@ function Section({
   const level = userDefinedLevel ?? contextLevel + 1;
 
   return (
-    <HeadingsLevelContext.Provider value={level}>
+    <HeadingsLevelContext value={level}>
       <Component {...restProps}>{children}</Component>
-    </HeadingsLevelContext.Provider>
+    </HeadingsLevelContext>
   );
 }
 

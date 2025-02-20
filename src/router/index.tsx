@@ -1,7 +1,7 @@
 import MemoryComponentDataPage from '@/pages/memory-component-data/page';
 import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
 import TicTacToeWithContext from '@/pages/tic-tac-toe-with-context/page';
-import AuthHeadingsLevel from '@/pages/auto-headings-level/page';
+import AutoHeadingsLevelPage from '@/pages/auto-headings-level/page';
 import StateManagement from '@/pages/state-management/page';
 import ErrorBoundaryDemo from '@/pages/error-boundary/page';
 import UsingContextPage from '@/pages/using-context/page';
@@ -25,7 +25,7 @@ export const navList = [
   {
     path: 'auto-headings-level',
     text: '제목 레벨 자동 구성 (with 컨텍스트)',
-    element: <AuthHeadingsLevel />,
+    element: <AutoHeadingsLevelPage />,
   },
   {
     path: 't3-with-context',
