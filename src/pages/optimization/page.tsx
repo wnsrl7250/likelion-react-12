@@ -15,15 +15,14 @@ function OptimizationPage() {
   const handleAddStar = () => setStars((s) => s + '⭐️');
 
   // 4. 엘리먼트 메모(기억)
-  const cachedElement = useMemo(() => {
-    const element = (
+  const cachedElement = useMemo(
+    () => (
       <Counter
         messageElement={<Message greeting="요소 최적화가 필요해요! 😳" />}
       />
-    );
-
-    return element;
-  }, []);
+    ),
+    []
+  );
 
   return (
     <>
