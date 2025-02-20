@@ -1,12 +1,15 @@
 import { tm } from '@/utils/tw-merge';
 import { useContext } from 'react';
 import { TicTacToeContext } from '../contexts/tic-tac-toe';
+import { useTheme } from '@/contexts/theme';
 
 type CellProps = Omit<React.ComponentProps<'button'>, 'onClick'> & {
   index: number;
 };
 
 function Cell({ index, children, className = '', ...restProps }: CellProps) {
+  const { mode } = useTheme();
+
   const { playGame } = useContext(TicTacToeContext);
 
   const hasChildren = !!children;
@@ -28,6 +31,7 @@ function Cell({ index, children, className = '', ...restProps }: CellProps) {
         'border-black/50',
         { 'hover:border-black hover:bg-slate-100/60': !hasChildren },
         { 'cursor-not-allowed bg-black/10': hasChildren },
+        { 'bg-black text-white': mode.includes('dark') },
         className
       )}
       {...restProps}
