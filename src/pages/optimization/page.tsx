@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
+import { createContext, useMemo, useState } from 'react';
 import Heading from '@/components/heading';
 import Section from '@/components/section';
-import { createContext, useMemo, useState } from 'react';
+import Title from '@/components/title';
 import Counter from './components/counter';
 import Message from './components/message';
-import Title from '@/components/title';
 
 export const ColorContext = createContext('');
 
@@ -14,13 +14,10 @@ function OptimizationPage() {
   const [stars, setStars] = useState('⭐️');
   const handleAddStar = () => setStars((s) => s + '⭐️');
 
-  // 4. 엘리먼트 메모(기억)
-  const cachedElement = useMemo(
-    () => (
-      <Counter
-        messageElement={<Message greeting="요소 최적화가 필요해요! 😳" />}
-      />
-    ),
+  // 4. 값(요소 = 객체) 메모(memo)
+  const messageElement = useMemo(
+    () => <Message greeting="요소 최적화가 필요해요! 😳" />,
+    // 종속성이 변경되지 않는 이상 다시 실행될 일은 없다.
     []
   );
 
@@ -41,7 +38,9 @@ function OptimizationPage() {
         </div>
 
         <hr className="my-8" />
-        <ColorContext value={color}>{cachedElement}</ColorContext>
+        <ColorContext value={color}>
+          <Counter messageElement={messageElement} />
+        </ColorContext>
       </Section>
     </>
   );

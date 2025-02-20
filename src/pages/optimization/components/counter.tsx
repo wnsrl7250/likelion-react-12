@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 // const messageElement = createElement(Message, {
 //   greeting: '요소 최적화가 필요해요! 😳',
@@ -30,4 +30,5 @@ function Counter({ messageElement }: CounterProps) {
   );
 }
 
-export default Counter;
+// 5. 컴포넌트 메모(memo)
+export default memo(Counter);
