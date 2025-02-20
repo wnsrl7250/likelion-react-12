@@ -26,7 +26,7 @@ function OptimizationPage() {
       <Title>리액트 앱 성능 최적화</Title>
 
       <Section level={2}>
-        <Heading>성능 최적화</Heading>
+        <Heading className="text-2xl font-medium">성능 최적화</Heading>
         <hr className="my-8" />
 
         <div className="flex gap-5">

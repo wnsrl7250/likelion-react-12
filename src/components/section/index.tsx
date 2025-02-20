@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import HeadingsLevelContext from '@/contexts/level';
 
 type SectioningContent = React.ComponentProps<'section'>;
@@ -24,4 +24,4 @@ function Section({
   );
 }
 
-export default Section;
+export default memo(Section);

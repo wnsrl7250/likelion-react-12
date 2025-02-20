@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react';
+import { useCallback, useEffect, useId } from 'react';
 import usePersist from './use-persist';
 
 function useToggle(
@@ -20,11 +20,11 @@ function useToggle(
     }
   }, [persist, isToggled, saveToStorage]);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     const nextData = !isToggled;
     setData(nextData);
     if (persist) saveToStorage(nextData);
-  };
+  }, [isToggled, persist, saveToStorage, setData]);
 
   const clean = removeInStorage;
 
