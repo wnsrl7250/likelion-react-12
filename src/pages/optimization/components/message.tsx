@@ -1,10 +1,11 @@
 interface MessageProps {
   greeting: string;
+  color?: string;
 }
 
-function Message({ greeting }: MessageProps) {
+function Message({ greeting, color }: MessageProps) {
   console.log('렌더링', greeting);
-  return <p>{greeting}</p>;
+  return <p style={{ color }}>{greeting}</p>;
 }
 
 export default Message;
