@@ -1,6 +1,6 @@
 import { createContext, use, useState } from 'react';
 
-type ThemeMode = 'light' | 'dark' | 'contrast';
+type ThemeMode = 'light' | 'dark';
 
 interface ThemeContextValue {
   mode: ThemeMode;
