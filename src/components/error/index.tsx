@@ -1,5 +1,5 @@
 import { tm } from '@/utils/tw-merge';
-import type { FallbackProps } from 'react-error-boundary';
+import { FallbackProps } from 'react-error-boundary';
 
 function PrintError({ error, resetErrorBoundary }: FallbackProps) {
   return (

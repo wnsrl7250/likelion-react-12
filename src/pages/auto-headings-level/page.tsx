@@ -22,7 +22,7 @@ function AutoHeadingsLevelPage() {
       <Title>제목 자동 레벨 구성</Title>
 
       <ErrorBoundary FallbackComponent={PrintError}>
-        <Section level={2} className={sectionClasses}>
+        <Section level={4} className={sectionClasses}>
           <Heading
             showLevel={showLevel}
             className={tm('text-3xl', headingClasses)}

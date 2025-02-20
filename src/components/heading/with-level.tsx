@@ -1,4 +1,4 @@
-import { useContext, createElement, type JSX } from 'react';
+import { useContext, createElement } from 'react';
 
 import HeadingsLevelContext from '@/contexts/level';
 import { tm } from '@/utils/tw-merge';
@@ -26,10 +26,8 @@ function Heading({
     throw new Error(`<h${level}> 요소는 존재하지 않습니다.`);
   }
 
-  const ComponentName = `h${level}` as keyof JSX.IntrinsicElements;
-
   return createElement(
-    ComponentName,
+    `h${level}`,
     {
       className: tm(
         {
