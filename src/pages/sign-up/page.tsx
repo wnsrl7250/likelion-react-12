@@ -3,6 +3,7 @@ import FormInput from '@/components/form-input';
 import Title from '@/components/title';
 import { isEmail, isPassword } from '@/lib/validator';
 import { useState } from 'react';
+import { Link } from 'react-router';
 import S from './style.module.css';
 
 interface SignUpFormData {
@@ -144,9 +145,9 @@ function SignUpPage() {
         </section>
         <p className="text-white text-center">
           이미 가입했나요?{' '}
-          <a href="/auth/signin" className="text-sky-400">
+          <Link to="/signin" className="text-sky-400">
             로그인
-          </a>
+          </Link>
           하세요!
         </p>
       </div>
