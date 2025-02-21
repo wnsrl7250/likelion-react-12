@@ -1,6 +1,7 @@
 import AccessDOMPage from '@/pages/access-dom/page';
 import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
 import AppStateManagementPage from '@/pages/app-state-management/page';
+import AuthManagementPage from '@/pages/auth-management/page';
 import AutoHeadingsLevelPage from '@/pages/auto-headings-level/page';
 import CustomHookPage from '@/pages/custom-hook/page';
 import DataFetchingPage from '@/pages/data-fetching/page';
@@ -25,6 +26,11 @@ import UsingContextPage from '@/pages/using-context/page';
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'auth',
+    text: '사용자 관리',
+    element: <AuthManagementPage />,
+  },
   {
     path: 'app-state-management',
     text: '앱 상태 관리',
