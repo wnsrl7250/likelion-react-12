@@ -17,7 +17,7 @@ interface EventData {
   value: string;
 }
 
-function HomeworkSignInForm() {
+function SignInPage() {
   const [formData, setFormData] = useState<SignInFormData>({
     useremail: '',
     userpassword: '',
@@ -111,4 +111,4 @@ function HomeworkSignInForm() {
   );
 }
 
-export default HomeworkSignInForm;
+export default SignInPage;

@@ -5,7 +5,7 @@ import ReactPingIcon from '@/components/react-ping-icon';
 import Nav from '@/components/nav';
 import Router from '@/router';
 
-function Playground() {
+function PlaygroundPage() {
   const [route, setRoute] = useState(getView);
 
   // [이펙트]
@@ -59,4 +59,4 @@ function Playground() {
   );
 }
 
-export default Playground;
+export default PlaygroundPage;

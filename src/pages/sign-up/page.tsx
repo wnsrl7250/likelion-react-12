@@ -19,7 +19,7 @@ interface EventData {
   value: string;
 }
 
-function HomeworkSignUpForm() {
+function SignUpPage() {
   const [formData, setFormData] = useState<SignUpFormData>({
     username: '',
     useremail: '',
@@ -145,4 +145,4 @@ function HomeworkSignUpForm() {
   );
 }
 
-export default HomeworkSignUpForm;
+export default SignUpPage;
