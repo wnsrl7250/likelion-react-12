@@ -1,29 +1,35 @@
-import MemoryComponentDataPage from '@/pages/memory-component-data/page';
-import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
-import TicTacToeWithContext from '@/pages/tic-tac-toe-with-context/page';
-import AutoHeadingsLevelPage from '@/pages/auto-headings-level/page';
-import StateManagement from '@/pages/state-management/page';
-import ErrorBoundaryDemo from '@/pages/error-boundary/page';
-import UsingContextPage from '@/pages/using-context/page';
-import DataFetchingPage from '@/pages/data-fetching/page';
-import SuspenseUsePage from '@/pages/suspense-use/page';
-import CustomHookPage from '@/pages/custom-hook/page';
-import SideEffectDemo from '@/pages/side-effect/page';
-import SearchListPage from '@/pages/search-list/page';
 import AccessDOMPage from '@/pages/access-dom/page';
+import AnimationWithMotionPage from '@/pages/animation-with-motion/page';
+import AppStateManagementPage from '@/pages/app-state-management/page';
+import AutoHeadingsLevelPage from '@/pages/auto-headings-level/page';
+import CustomHookPage from '@/pages/custom-hook/page';
+import DataFetchingPage from '@/pages/data-fetching/page';
+import ErrorBoundaryDemo from '@/pages/error-boundary/page';
 import LifecycleDemo from '@/pages/lifecycle/page';
 import MemoListPage from '@/pages/memo-list/page';
-import TicTacToe from '@/pages/tic-tac-toe/page';
+import MemoryComponentDataPage from '@/pages/memory-component-data/page';
+import NotFound from '@/pages/not-found/page';
+import OptimizationPage from '@/pages/optimization/page';
+import SearchListPage from '@/pages/search-list/page';
+import SideEffectDemo from '@/pages/side-effect/page';
 import SignInForm from '@/pages/sign-in/page';
 import SignUpForm from '@/pages/sign-up/page';
-import NotFound from '@/pages/not-found/page';
+import StateManagement from '@/pages/state-management/page';
+import SuspenseUsePage from '@/pages/suspense-use/page';
+import TicTacToeWithContext from '@/pages/tic-tac-toe-with-context/page';
+import TicTacToe from '@/pages/tic-tac-toe/page';
 import UnderstandingContextPage from '@/pages/understanding-context/page';
-import OptimizationPage from '@/pages/optimization/page';
+import UsingContextPage from '@/pages/using-context/page';
 
 // --------------------------------------------------------------------------
 // 내비게이션 리스트 데이터
 
 export const navList = [
+  {
+    path: 'app-state-management',
+    text: '앱 상태 관리',
+    element: <AppStateManagementPage />,
+  },
   {
     path: 'react-optimization',
     text: '성능 최적화',
