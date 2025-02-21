@@ -7,23 +7,31 @@ interface User {
   token: string;
 }
 
+interface AuthUser {
+  user: null | User;
+  isSignin: boolean;
+}
+
+const initialUser: AuthUser = {
+  user: null,
+  isSignin: false,
+};
+
 export const useAuthStore = create(
   persist(
     devtools(
-      combine(
-        {
-          user: null as null | User,
-          isSignin: false,
-        },
-        (set) => ({
-          signIn: (user: User) =>
-            set({
+      combine({ ...initialUser }, (set) => ({
+        signIn: (user: User) =>
+          set(
+            {
               user,
               isSignin: !!user,
-            }),
-          signOut: () => set((s) => s),
-        })
-      )
+            },
+            undefined,
+            'authUser/signin'
+          ),
+        signOut: () => set(initialUser, undefined, 'authUser/signout'),
+      }))
     ),
     { name: 'store/auth' }
   )

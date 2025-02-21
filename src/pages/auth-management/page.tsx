@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth';
 
 function AuthManagementPage() {
   const signIn = useAuthStore((s) => s.signIn);
+  const signOut = useAuthStore((s) => s.signOut);
 
   const handleSignin = () => {
     const user = {
@@ -23,9 +24,20 @@ function AuthManagementPage() {
       <Section level={2} className="flex flex-col gap-4">
         <Heading className="text-2xl font-medium">사용자 관리</Heading>
 
-        <form action={handleSignin}>
-          <button type="submit" className="px-3 py-2 bg-black text-white">
+        <form>
+          <button
+            type="submit"
+            formAction={handleSignin}
+            className="cursor-pointer px-3 py-2 bg-black text-white"
+          >
             로그인
+          </button>
+          <button
+            type="submit"
+            formAction={signOut}
+            className="cursor-pointer px-3 py-2 bg-white text-black"
+          >
+            로그아웃
           </button>
         </form>
       </Section>
