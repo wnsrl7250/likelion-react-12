@@ -82,31 +82,40 @@ function SignInPage() {
   return (
     <>
       <Title>사용자 로그인 폼</Title>
-      <section>
-        <h3 className="sr-only">로그인 폼</h3>
-        <form className={S.signInForm} action={handleSignIn}>
-          <FormInput
-            type="email"
-            label="이메일"
-            name="useremail"
-            placeholder="user@company.io"
-            value={formData.useremail}
-            onChange={handleChange}
-            hasError={error.useremail}
-          />
-          <FormInput
-            type="password"
-            label="패스워드"
-            name="userpassword"
-            placeholder="숫자, 영문 조합 6자리 이상 입력"
-            hasToggleButton
-            value={formData.userpassword}
-            onChange={handleChange}
-            hasError={error.userpassword}
-          />
-          <ActionButton aria-disabled={!isAllInputted}>로그인</ActionButton>
-        </form>
-      </section>
+      <div className="flex flex-col gap-10">
+        <section>
+          <h3 className="sr-only">로그인 폼</h3>
+          <form className={S.signInForm} action={handleSignIn}>
+            <FormInput
+              type="email"
+              label="이메일"
+              name="useremail"
+              placeholder="user@company.io"
+              value={formData.useremail}
+              onChange={handleChange}
+              hasError={error.useremail}
+            />
+            <FormInput
+              type="password"
+              label="패스워드"
+              name="userpassword"
+              placeholder="숫자, 영문 조합 6자리 이상 입력"
+              hasToggleButton
+              value={formData.userpassword}
+              onChange={handleChange}
+              hasError={error.userpassword}
+            />
+            <ActionButton aria-disabled={!isAllInputted}>로그인</ActionButton>
+          </form>
+        </section>
+        <p className="text-white text-center">
+          아직 가입하지 않았나요?{' '}
+          <a href="/auth/signup" className="text-sky-400">
+            회원가입
+          </a>
+          하세요!
+        </p>
+      </div>
     </>
   );
 }

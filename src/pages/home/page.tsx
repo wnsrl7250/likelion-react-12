@@ -5,9 +5,9 @@ import Title from '@/components/title';
 function HomePage() {
   return (
     <>
-      <Title>싱글 페이지 애플리케이션</Title>
+      <Title>홈</Title>
       <Section level={2}>
-        <Heading>홈 페이지</Heading>
+        <Heading>React Router를 활용해 싱글 페이지 앱 구현</Heading>
       </Section>
     </>
   );

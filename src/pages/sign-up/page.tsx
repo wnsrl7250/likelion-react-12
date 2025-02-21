@@ -98,49 +98,58 @@ function SignUpPage() {
   return (
     <>
       <Title>사용자 가입 폼</Title>
-      <section>
-        <h3 className="sr-only">회원가입 폼</h3>
-        <form className={S.signUpForm} action={handleSignUp}>
-          <FormInput
-            label="이름"
-            name="username"
-            placeholder="2글자 이상"
-            value={formData.username}
-            onChange={handleChange}
-            hasError={error.username}
-          />
-          <FormInput
-            type="email"
-            label="이메일"
-            name="useremail"
-            placeholder="user@company.io"
-            value={formData.useremail}
-            onChange={handleChange}
-            hasError={error.useremail}
-          />
-          <FormInput
-            type="password"
-            label="패스워드"
-            name="userpassword"
-            placeholder="숫자, 영문 조합 6자리 이상 입력"
-            value={formData.userpassword}
-            onChange={handleChange}
-            hasError={error.userpassword}
-            hasToggleButton
-          />
-          <FormInput
-            type="password"
-            label="패스워드 확인"
-            name="userpasswordConfirm"
-            placeholder="입력한 패스워드 다시 입력"
-            value={formData.userpasswordConfirm}
-            onChange={handleChange}
-            hasError={error.userpasswordConfirm}
-            hasToggleButton
-          />
-          <ActionButton aria-disabled={!isAllInputed}>회원가입</ActionButton>
-        </form>
-      </section>
+      <div className="flex flex-col gap-10">
+        <section>
+          <h3 className="sr-only">회원가입 폼</h3>
+          <form className={S.signUpForm} action={handleSignUp}>
+            <FormInput
+              label="이름"
+              name="username"
+              placeholder="2글자 이상"
+              value={formData.username}
+              onChange={handleChange}
+              hasError={error.username}
+            />
+            <FormInput
+              type="email"
+              label="이메일"
+              name="useremail"
+              placeholder="user@company.io"
+              value={formData.useremail}
+              onChange={handleChange}
+              hasError={error.useremail}
+            />
+            <FormInput
+              type="password"
+              label="패스워드"
+              name="userpassword"
+              placeholder="숫자, 영문 조합 6자리 이상 입력"
+              value={formData.userpassword}
+              onChange={handleChange}
+              hasError={error.userpassword}
+              hasToggleButton
+            />
+            <FormInput
+              type="password"
+              label="패스워드 확인"
+              name="userpasswordConfirm"
+              placeholder="입력한 패스워드 다시 입력"
+              value={formData.userpasswordConfirm}
+              onChange={handleChange}
+              hasError={error.userpasswordConfirm}
+              hasToggleButton
+            />
+            <ActionButton aria-disabled={!isAllInputed}>회원가입</ActionButton>
+          </form>
+        </section>
+        <p className="text-white text-center">
+          이미 가입했나요?{' '}
+          <a href="/auth/signin" className="text-sky-400">
+            로그인
+          </a>
+          하세요!
+        </p>
+      </div>
     </>
   );
 }
