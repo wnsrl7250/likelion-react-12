@@ -111,7 +111,7 @@ function SignInPage() {
         </section>
         <p className="text-white text-center">
           아직 가입하지 않았나요?{' '}
-          <Link to="/signup" className="text-sky-400">
+          <Link to="/dashboard/signup" className="text-sky-400">
             회원가입
           </Link>
           하세요!

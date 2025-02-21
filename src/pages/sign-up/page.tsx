@@ -145,7 +145,7 @@ function SignUpPage() {
         </section>
         <p className="text-white text-center">
           이미 가입했나요?{' '}
-          <Link to="/signin" className="text-sky-400">
+          <Link to="/dashboard/signin" className="text-sky-400">
             로그인
           </Link>
           하세요!
