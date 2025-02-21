@@ -25,17 +25,21 @@ import UsingContextPage from '@/pages/using-context/page';
 // --------------------------------------------------------------------------
 // 내비게이션 리스트 데이터
 
+// Routes
 export const navList = [
+  // Route
   {
     path: 'auth',
     text: '사용자 관리',
     element: <AuthManagementPage />,
   },
+  // Route
   {
     path: 'app-state-management',
     text: '앱 상태 관리',
     element: <AppStateManagementPage />,
   },
+  // Route
   {
     path: 'react-optimization',
     text: '성능 최적화',
@@ -117,6 +121,7 @@ export const navList = [
 // --------------------------------------------------------------------------
 // 라우터 컴포넌트
 
+// BrowserRouter
 function Router({ route }: { route: string }) {
   return navList.find(({ path }) => path === route)?.element ?? <NotFound />;
 }
