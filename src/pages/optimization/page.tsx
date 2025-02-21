@@ -11,7 +11,7 @@ export const ColorContext = createContext('');
 
 function OptimizationPage() {
   // 상태
-  const [color, setColor] = useState('#000');
+  const [color, setColor] = useState('#45a6d9');
 
   // 상태 업데이트 로직을 포함하는 이벤트 핸들러
   // 하위 컴포넌트에 전달하는 함수는 매번 렌더링될 때마다 새로운 함수가 된다.... (리-렌더링 주 원인)
@@ -48,32 +48,32 @@ function OptimizationPage() {
     []
   );
 
-  const handler = () => {
-    setColor('#000');
-  };
-
   return (
     <>
       <Title>리액트 앱 성능 최적화</Title>
 
-      <button type="button" onClick={handler}>
-        change color
-      </button>
-
       <Section level={2}>
         <Heading className="text-2xl font-medium">성능 최적화</Heading>
-        <hr className="my-8" />
-        <div className="flex gap-5">
-          <button type="button" onClick={handleAddStar}>
+
+        <hr className="my-8 border-black/20" />
+
+        <div className="flex gap-0.5 overflow-auto">
+          <button
+            type="button"
+            className="cursor-pointer shrink-0 py-2 px-4 bg-black text-white font-bold rounded-sm"
+            onClick={handleAddStar}
+          >
             ⭐️ 추가
           </button>
-
-          <output>{stars}</output>
+          <output className="py-2 px-3 bg-black text-white rounded-sm tracking-widest">
+            {stars}
+          </output>
         </div>
+
+        <hr className="my-8 border-black/20" />
 
         <ColorContext value={color}>
           <ColorContextSetter setColor={setColor} />
-          <hr className="my-8" />
           <Counter messageElement={messageElement} />
         </ColorContext>
       </Section>

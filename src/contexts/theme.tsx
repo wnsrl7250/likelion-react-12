@@ -1,3 +1,5 @@
+import { tm } from '@/utils/tw-merge';
+import { MoonSolid, SunSolid } from '@mynaui/icons-react';
 import { createContext, use, useState } from 'react';
 
 type ThemeMode = 'light' | 'dark';
@@ -28,19 +30,30 @@ export function ThemeProvider(props: React.PropsWithChildren) {
 
 // 테마 상태 업데이트하는 컴포넌트
 export function ThemeSetters() {
-  const { setMode } = useTheme();
+  const { mode, setMode } = useTheme();
+
+  const isLightMode = mode.includes('light');
+  const label = isLightMode ? '다크 모드' : '라이트 모드';
 
   const handleToggleTheme = () => {
-    setMode((m) => (m.includes('light') ? 'dark' : 'light'));
+    setMode(isLightMode ? 'dark' : 'light');
   };
 
   return (
     <button
       type="button"
-      className="flex w-full bg-black text-white p-2 cursor-pointer justify-center"
+      aria-label={label}
+      title={label}
+      className={tm(
+        'cursor-pointer justify-center',
+        'fixed top-3 right-3',
+        'flex p-1 rounded-full',
+        'bg-react text-white ',
+        'text-xs font-semibold'
+      )}
       onClick={handleToggleTheme}
     >
-      테마 스위치
+      {isLightMode ? <MoonSolid size={14} /> : <SunSolid size={14} />}
     </button>
   );
 }

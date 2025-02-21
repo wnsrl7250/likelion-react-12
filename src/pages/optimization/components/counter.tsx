@@ -17,15 +17,15 @@ function Counter({ messageElement }: CounterProps) {
   const increment = () => setCount((c) => c + 1);
 
   return (
-    <div>
+    <div className="flex gap-2 items-center">
       <button
         type="button"
-        className="cursor-pointer bg-react text-white size-8"
+        className="cursor-pointer bg-react text-white size-10 font-black rounded-full"
         onClick={increment}
       >
         {count}
       </button>
-      {messageElement}
+      <div className="bg-react py-2 px-4 rounded-sm">{messageElement}</div>
     </div>
   );
 }

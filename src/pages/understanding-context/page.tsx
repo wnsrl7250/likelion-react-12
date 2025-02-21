@@ -10,18 +10,15 @@ function UnderstandingContextPage() {
       <Heading>컨텍스트 이해</Heading>
       <ErrorBoundary FallbackComponent={PrintError}>
         <Box>
-          {' '}
           {/* 1 */}
           <Box>
-            {' '}
             {/* 2 */}
             <Box level={2}>
-              {' '}
               {/* 2 */}
               <Box>
-                {' '}
                 {/* 3 */}
-                <Box>Box Level</Box> {/* 4 */}
+                <Box></Box>
+                {/* 4 */}
               </Box>
             </Box>
           </Box>

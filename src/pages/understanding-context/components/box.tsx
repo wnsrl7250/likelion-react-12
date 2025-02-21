@@ -1,4 +1,3 @@
-// import { use } from 'react';
 import { tm } from '@/utils/tw-merge';
 import { BoxLevelContext, useBoxLevel } from '../context/box-level';
 
@@ -20,11 +19,20 @@ function Box({ level, children }: BoxProps) {
     <BoxLevelContext value={nextBoxLevel}>
       <div
         className={tm(
-          'flex flex-col justify-center items-center',
-          'size-60 bg-black/20 text-white p-5'
+          'relative w-full',
+          'shrink-0 flex flex-col justify-center items-center',
+          'bg-black/35 text-white py-10 px-8'
         )}
       >
-        <span className="p-5">{nextBoxLevel}</span>
+        <span
+          className={tm(
+            'absolute top-0 left-0',
+            'grid place-items-center',
+            'size-5 text-xs bg-black'
+          )}
+        >
+          {nextBoxLevel}
+        </span>
         {children}
       </div>
     </BoxLevelContext>
