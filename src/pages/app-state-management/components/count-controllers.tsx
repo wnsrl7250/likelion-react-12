@@ -13,9 +13,11 @@ function CountControllers() {
   // 상태 변경을 요청하는 함수이지, 변경된 상태가 아니므로
   // CountControllers 컴포넌트는 리-렌더링 될 이유가 없습니다.
 
-  const increment = useCountStore((s) => s.increment);
-  const decrement = useCountStore((s) => s.decrement);
-  const reset = useCountStore((s) => s.reset);
+  // const increment = useCountStore((s) => s.increment);
+  // const decrement = useCountStore((s) => s.decrement);
+  // const reset = useCountStore((s) => s.reset);
+
+  const { increment, decrement, reset } = useCountStore((s) => s.actions);
 
   return (
     <div className="flex gap-1">
