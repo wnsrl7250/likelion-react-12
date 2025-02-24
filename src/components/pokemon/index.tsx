@@ -1,12 +1,14 @@
 import useQuery from '@/hooks/use-query';
-import { useParams } from 'react-router';
+import { useParams, useSearchParams } from 'react-router';
 import Loading from '../loading';
 import type { Pokemon as PokemonType } from '@/types/pokemon';
 
 function Pokemon() {
-  const { name: pokemonName, weight, lang } = useParams();
+  const { name: pokemonName } = useParams();
+  const [searchParams] = useSearchParams();
 
-  console.log(lang);
+  const weight = searchParams.get('weight');
+  const height = searchParams.get('height');
 
   const { isLoading, data: pokemon } = useQuery<PokemonType>({
     queryKey: `@pokemon/${pokemonName}`,
@@ -44,8 +46,8 @@ function Pokemon() {
                 );
               })}
           </div>
-          <figcaption className="text-xl text-stone-700 uppercase -translate-y-1">
-            {pokemonName} / {weight}kg
+          <figcaption className="mt-3 text-xl text-stone-700 uppercase -translate-y-1">
+            {pokemonName} / {weight}kg / {height}M
           </figcaption>
         </div>
       )}

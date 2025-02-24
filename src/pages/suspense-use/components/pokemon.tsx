@@ -11,7 +11,13 @@ function Pokemon({ id }: PokemonProps) {
   const pokemon = use(fetchPokemon(id));
 
   return (
-    <Link to={`/pokemons/name/${pokemon.name}/weight/${pokemon.weight}`}>
+    <Link
+      to={{
+        pathname: `/pokemons/${pokemon.name}`,
+        search: `?weight=${pokemon.weight}&height=${pokemon.height}`,
+      }}
+      state={pokemon}
+    >
       <PokemonLayout>
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
