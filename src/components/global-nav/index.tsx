@@ -1,7 +1,5 @@
-import { NavLink } from 'react-router';
+import NavLink from './link';
 import HomeLink from '../home-link';
-import S from './style.module.css';
-import clsx from 'clsx';
 
 function GlobalNav() {
   return (
@@ -12,16 +10,10 @@ function GlobalNav() {
           <HomeLink />
         </li>
         <li>
-          <NavLink
-            className={({ isActive }) => {
-              const baseClasses = 'p-2 bg-black text-white';
-
-              return clsx(baseClasses, { [S.active]: isActive });
-            }}
-            to="/playground"
-          >
-            플레이그라운드
-          </NavLink>
+          <NavLink to="/playground">플레이그라운드</NavLink>
+        </li>
+        <li>
+          <NavLink to="/memo-list">메모리스트</NavLink>
         </li>
         <li>
           <NavLink className="p-2 bg-black text-white" to="/dashboard">
